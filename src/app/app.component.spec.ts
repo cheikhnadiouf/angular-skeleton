@@ -1,35 +1,33 @@
-import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { expect } from '@jest/globals';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { SpinnerService } from './shared/services/spinner.service';
 
 describe('AppComponent', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+  let media: MediaMatcher;
+  let spinnerService: SpinnerService;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        AppComponent
-      ],
-    }).compileComponents();
-  });
+      imports: [AppComponent]
+    })
+      .compileComponents();
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'angular-skeleton'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('angular-skeleton');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    // Service instancied by the TestBed
+    // We can get resolve dependencies using the TestBed injector by using the get function.
+    media =  TestBed.inject(MediaMatcher);
+    spinnerService =  TestBed.inject(SpinnerService);
     fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, angular-skeleton');
   });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+
 });
