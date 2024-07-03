@@ -5,7 +5,7 @@ Changelog
 ---
 
 ## v1.0.1 patch
-- [ ] Fix: Issue with backendless service: Connexion refused
+- [X] Fix: Issue with backendless service: Connexion refused
 - [ ] Fix: Issue with Lighthouse NPM script (HTML page generation)
 - [ ] Fix: Issues and conflicts of assertions in Jest and Cypress
 - [ ] Fix: Issue with page not found from redirect
@@ -20,7 +20,7 @@ Changelog
 ## v0.1 Minor
 - [X] Task: Angular skeleton
 - [X] Task: UX/UI Design
-- [ ] Task: Backendless development API REST
+- [X] Task: Backendless development API REST
 - [ ] Task: Backendless development WS Socket
 - [ ] Task: Add/Update instructions and templates for NGRX Store, Jest and Cypress
 - [X] Task: Test jest code sample
