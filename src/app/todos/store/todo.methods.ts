@@ -45,7 +45,7 @@ export function withTodosMethods() {
           );
         }),
       ),
-      moveToDone: rxMethod<TodoInterface>(
+      updateTodo: rxMethod<TodoInterface>(
         switchMap((todo) => {
           patchState(store, { loading: true });
 

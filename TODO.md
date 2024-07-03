@@ -6,7 +6,7 @@ Changelog
 
 ## v1.0.1 patch
 ---
-- [ ] Fix: Issue with backendless service: Connexion refused
+- [X] Fix: Issue with backendless service: Connexion refused
 - [ ] Fix: Issue with Lighthouse NPM script (HTML page generation)
 - [ ] Fix: Issues and conflicts of assertions in Jest and Cypress
 - [ ] Fix: Issue with page not found from redirect

@@ -6,9 +6,9 @@
       <form (ngSubmit)="addTodo()" [formGroup]="form">
         <mat-form-field hintLabel="Min 1 characters" hideRequiredMarker>
           <mat-label>Task</mat-label>
-          <input matInput #input minlength="1" appearance="outlined" placeholder="..." formControlName="todoValue"
+          <input matInput #inputValue minlength="1" appearance="outlined" placeholder="..." formControlName="inputValue"
             id="form1" type="text" required />
-          <mat-hint align="end">{{input.value?.length || 0}}/1</mat-hint>
+          <mat-hint align="end">{{ inputValue.value?.length || 0 }}/1</mat-hint>
         </mat-form-field>
         <button mat-mini-fab [disabled]="form.invalid" type="submit"
           aria-label="icon button"><mat-icon>arrow_right</mat-icon></button>
@@ -29,7 +29,7 @@
         @for (item of store.items(); track item.id) {
         <mat-list-item role="listitem">
           <mat-checkbox type="checkbox" [checked]="item.done" value="" aria-label="..."
-            (click)="store.moveToDone(item)">
+            (click)="store.updateTodo(item)">
             {{ item.value }}
           </mat-checkbox>
           <button type="button" (click)="store.deleteTodo(item)" mat-mini-fab><mat-icon>delete</mat-icon></button>

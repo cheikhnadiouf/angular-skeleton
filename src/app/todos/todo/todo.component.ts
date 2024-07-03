@@ -20,7 +20,7 @@ export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
   private readonly formBuilder = inject(FormBuilder);
   progressBarVal = 0;
   form = this.formBuilder.group({
-    todoValue: ['', Validators.required],
+    inputValue: ['', Validators.required],
     done: [false],
   });
 
@@ -47,7 +47,7 @@ export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   addTodo() {
-    this.store.addTodo(this.form.value.todoValue);
+    this.store.addTodo(this.form.value.inputValue);
     this.progressBarVal = 100;
     this.form.reset();
     this.notificationService.openSnackBar('Form submitted');

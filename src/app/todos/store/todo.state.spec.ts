@@ -24,10 +24,10 @@ describe('TodoStore', () => {
       const store = TestBed.inject(TodoStore);
       const item = { id: '1', value: 'test', done: false } as TodoInterface;
       jest.spyOn(service, 'updateItem').mockReturnValue(of(item));
-      const spy = jest.spyOn(store, 'update');
+      const spy = jest.spyOn(store, 'updateTodo');
 
       // act
-      store.moveToDone(item);
+      store.updateTodo(item);
 
       // assert
       expect(spy).toHaveBeenCalledWith({ ...item, done: true });
