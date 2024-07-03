@@ -1,7 +1,7 @@
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +18,8 @@ const commonProviders = [
 ];
 
 const nonProductionProviders = [ 
+  provideHttpClient(withInterceptorsFromDi()), 
+  // withInterceptorsFromDi() function add interceptors that are registered in the old format (Class-based)
   {
     provide: HTTP_INTERCEPTORS, useClass: TodosBackendLessInterceptor, multi: true,
   }

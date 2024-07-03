@@ -43,6 +43,8 @@ export class TodosBackendLessInterceptor implements HttpInterceptor {
           return createTodo();
         case url.match(/\/todos\/\w+$/) && method === 'PATCH':
           return updateTodo();
+        case url.match(/\/todos\/\w+$/) && method === 'PUT':
+            return updateTodo();
         case url.match(/\/todos\/\w+$/) && method === 'DELETE':
           return deleteTodo();
         default:
@@ -68,10 +70,11 @@ export class TodosBackendLessInterceptor implements HttpInterceptor {
     }
 
     function createTodo() {
-      const todo = JSON.parse(body);
+      const todo = typeof body === 'string'? JSON.parse(body) : body;
 
-      if (todos.find((x) => x.code === todo.code)) {
-        throw Error(`Todo with the code ${todo.code} already exists`);
+      // Check if already exist
+      if (todos.find((x) => x.value === todo.value)) {
+        throw Error(`Todo with the value ${todo.value} already exists`);
       }
 
       // assign todo id and a few other properties then save
@@ -79,18 +82,18 @@ export class TodosBackendLessInterceptor implements HttpInterceptor {
       todos.push(todo);
       localStorage.setItem(todosKey, JSON.stringify(todos));
 
-      return ok({ data: basicDetails(todo) });
+      return ok(basicDetails(todo));
     }
 
     function updateTodo() {
-      let params = JSON.parse(body);
+      let params = typeof body === 'string' ? JSON.parse(body) : body;
       let todo = todos.find((x) => x.id === idFromUrl());
 
       if (
-        params.code !== todo.code &&
-        todos.find((x) => x.code === params.code)
+        params.value !== todo.value &&
+        todos.find((x) => x.value === params.value)
       ) {
-        throw Error(`Todo with the code ${params.code} already exists`);
+        throw Error(`Todo with the value ${params.value} already exists`);
       }
 
       // only update password if entered
@@ -102,7 +105,7 @@ export class TodosBackendLessInterceptor implements HttpInterceptor {
       Object.assign(todo, params);
       localStorage.setItem(todosKey, JSON.stringify(todos));
 
-      return ok({ data: basicDetails(todo) });
+      return ok(basicDetails(todo));
     }
 
     function deleteTodo() {
