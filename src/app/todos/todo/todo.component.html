@@ -6,9 +6,9 @@
       <form (ngSubmit)="addTodo()" [formGroup]="form">
         <mat-form-field hintLabel="Min 1 characters" hideRequiredMarker>
           <mat-label>Task</mat-label>
-          <input matInput #inputValue minlength="1" appearance="outlined" placeholder="..." formControlName="inputValue"
+          <input matInput #value minlength="1" appearance="outlined" placeholder="..." formControlName="value" [(ngModel)]="store.currentTodo().value"
             id="form1" type="text" required />
-          <mat-hint align="end">{{ inputValue.value?.length || 0 }}/1</mat-hint>
+          <mat-hint align="end">{{ value.value?.length || 0 }}/1</mat-hint>
         </mat-form-field>
         <button mat-mini-fab [disabled]="form.invalid" type="submit"
           aria-label="icon button"><mat-icon>arrow_right</mat-icon></button>

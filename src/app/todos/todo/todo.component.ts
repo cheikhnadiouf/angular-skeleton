@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, inject } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
@@ -7,6 +7,7 @@ import { NotificationService } from '../../shared/services/notification.service'
 import { TodoStore } from '../../todos/store/todo.state';
 import { delay } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import { TodoInterface } from '../todo.interface';
 
 @Component({
   selector: 'app-todo',
@@ -20,7 +21,7 @@ export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
   private readonly formBuilder = inject(FormBuilder);
   progressBarVal = 0;
   form = this.formBuilder.group({
-    inputValue: ['', Validators.required],
+    value:  new FormControl( '', [Validators.required]),
     done: [false],
   });
 
@@ -32,6 +33,7 @@ export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit(): void {
     //Called once, when the instance is created.
     this.titleService.setTitle(`${ this.title }`);
+
 
     setTimeout(() => {
       this.notificationService.openSnackBar('Welcome on Home page!');
@@ -47,7 +49,7 @@ export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   addTodo() {
-    this.store.addTodo(this.form.value.inputValue);
+    this.store.addTodo(this.form.value as unknown as TodoInterface ); // 'as unknown' is used for any Partial interface types
     this.progressBarVal = 100;
     this.form.reset();
     this.notificationService.openSnackBar('Form submitted');

@@ -20,6 +20,11 @@ export function withTodosSelectors() {
 
         return (done / total) * 100;
       }),
+      currentTodo: computed(() => {
+        const total = items().length;
+        const lastItem = (total > 0) ? items()[total - 1] : { value: '' };
+        return lastItem;
+      }),
     }))
   );
 }

@@ -31,7 +31,7 @@ export function withTodosMethods() {
 
         patchState(store, { items, loading: false });
       },
-      addTodo: rxMethod<string>(
+      addTodo: rxMethod<TodoInterface>(
         switchMap((value) => {
           patchState(store, { loading: true });
 

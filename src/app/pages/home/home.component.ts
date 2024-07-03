@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   private readonly formBuilder = inject(FormBuilder);
   progressBarVal = 0;
   form = this.formBuilder.group({
-    inputValue: ['', Validators.required],
+    value: ['', Validators.required],
     done: [false],
   });
 
@@ -48,10 +48,4 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     //Called once, before the instance is destroyed.
   }
 
-  addTodo() {
-    this.store.addTodo(this.form.value.inputValue);
-    this.progressBarVal = 100;
-    this.form.reset();
-    this.notificationService.openSnackBar('Form submitted');
-  }
 }
