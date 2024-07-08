@@ -22,7 +22,7 @@ export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
   progressBarVal = 0;
   form = this.formBuilder.group({
     value:  new FormControl( '', [Validators.required]),
-    done: [false],
+    done: new FormControl( false, []),
   });
 
   constructor(
@@ -50,8 +50,7 @@ export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
 
   addTodo() {
     this.store.addTodo(this.form.value as unknown as TodoInterface ); // 'as unknown' is used for any Partial interface types
-    this.progressBarVal = 100;
-    this.form.reset();
+    // this.form.reset();
     this.notificationService.openSnackBar('Form submitted');
   }
 }

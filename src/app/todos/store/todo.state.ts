@@ -5,11 +5,16 @@ import { withTodosSelectors } from './todo.selectors';
 
 export interface TodoState {
   items: TodoInterface[];
+  currentTodo: Partial<TodoInterface>,
   loading: boolean;
 }
 
 export const initialState: TodoState = {
   items: [],
+  currentTodo: {
+    value: 'hello',
+    done: false
+  },
   loading: false,
 };
 
@@ -22,6 +27,7 @@ export const TodoStore = signalStore(
     onInit({ loadAllTodosByPromise }) {
       console.log('on init');
       loadAllTodosByPromise();
+      // or loadAllTodos();
     },
     onDestroy() {
       console.log('on destroy');

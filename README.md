@@ -193,7 +193,7 @@ Run `npm run code-perf` to execute an audit performance of the code via [Lightho
 
 ### Running code security
 
-Run `npm run code:security` to execute a security scan of the code via [Snyk security](https://snyk.io/)
+Run `npm run code:security` to execute a security scan of the code via [Npm audit](https://docs.npmjs.com/cli/v10/commands/npm-audit)
 
 ### Optional: Generate mermaid diagrams
 
