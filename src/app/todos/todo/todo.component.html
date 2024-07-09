@@ -4,17 +4,29 @@
   </mat-card-header>
   <mat-card-content appearance="outlined">
     <form (ngSubmit)="addTodo()" [formGroup]="todoForm">
-      <mat-form-field hintLabel="Min 1 characters" hideRequiredMarker>
+      <mat-form-field hideRequiredMarker>
         <mat-label>Task</mat-label>
-        <input matInput minlength="1" appearance="outlined" placeholder="..." formControlName="value" id="value"
+        <input matInput minlength="2" appearance="outlined" placeholder="..." formControlName="value" id="value"
           type="text" required />
-        <mat-hint align="end">{{ todoForm.value.value?.length || 0 }}/1</mat-hint>
+          <mat-hint style="color: red" align="end" *ngIf="todoForm.get('value').invalid && (todoForm.get('value').dirty || todoForm.get('value').touched)">
+              <span *ngIf="todoForm.get('value').errors?.['required']"> Value is required.
+              </span>
+              <span *ngIf="todoForm.get('value').errors?.['minlength']"> At least 2 characters: {{ todoForm.value.value?.length || 0 }}/2 .
+              </span>
+              <span *ngIf="todoForm.get('value').errors?.['serverError']"> {{ store.errorMessage() }}.
+              </span>
+          </mat-hint>
       </mat-form-field>
       <button mat-mini-fab [disabled]="!todoForm.valid" type="submit"
         aria-label="icon button"><mat-icon>arrow_right</mat-icon></button>
     </form>
+    
     <hr>
+    <h3 class="mb-3">Unified control state event: </h3>
     <p>Form Status: {{ todoForm.status }}</p>
+    <p>Form touched: {{ todoForm.touched }}</p>
+    <p>Form pristine (first time): {{ todoForm.pristine }}</p>
+    <p>Form value: {{ todoForm.value?.value || 'None' }}</p>
   </mat-card-content>
   <mat-card-footer appearance="" style="padding: 16px;">
     <mat-progress-bar [mode]="store.loading ? 'determinate' : 'indeterminate'" [value]="progressBarVal">

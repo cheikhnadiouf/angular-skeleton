@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, AfterViewInit, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, inject, effect } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, ValueChangeEvent } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
@@ -8,7 +8,7 @@ import { TodoStore } from '../../todos/store/todo.state';
 import { delay, filter } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { TodoInterface } from '../todo.interface';
-import { patchState } from '@ngrx/signals';
+import { getState, patchState } from '@ngrx/signals';
 
 @Component({
   selector: 'app-todo',
@@ -32,6 +32,21 @@ export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
       value: new FormControl<string | null>(this.store.currentTodo.value(), [Validators.required]),
       done: new FormControl<boolean>(this.store.currentTodo.done(), []),
     });
+
+    effect(() => {
+      // 👇 The effect will be re-executed whenever the state changes.
+      const state = getState(this.store);
+      console.log('Todo state changed', state);
+      if (state.error) {
+        this.notificationService.openSnackBar(`Error: ${ state.errorMessage }`, 'red-snackbar');
+        this.todoForm.get('value').setErrors({ serverError: true });
+      } 
+
+      if (state.success) {
+        this.notificationService.openSnackBar(`Success: Form input: ${this.todoForm.value.value} | Current Todo state: ${this.store.currentTodo.value()}`, 'green-snackbar');
+        this.todoForm.get('value').reset();
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -39,16 +54,27 @@ export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
     this.titleService.setTitle(`${this.title}`);
 
     setTimeout(() => {
-      this.notificationService.openSnackBar('Welcome on Home page!');
+      this.notificationService.openSnackBar('Welcome on Home page!', 'green-snackbar');
     });
 
-    // To synchronize form update with signal store
+    // Handle Unified Control State Change Events 
     this.todoForm.events
       .pipe(filter((event) => event instanceof ValueChangeEvent)) // ValueChangeEvent | StatusChangeEvent | PristineChangeEvent | TouchedChangeEvent 
       .subscribe({
         next: (event: ValueChangeEvent<unknown>) => {
+          this.todoForm.get('value').setErrors(null);
+          // this.todoForm.get('value').reset();
+          // this.todoForm.get('value').setValue('Done');
+          // this.todoForm.get('value').markAsPristine();
+          // this.todoForm.get('value').markAsTouched();
+          // this.todoForm.get('value').setErrors({ incorrect: true });
+
+          // To synchronize form update with signal store
           patchState(this.store, {
             currentTodo: event.value,
+            error: false,
+            errorMessage: '',
+            success: false
           });
           console.log(event);
         },
@@ -65,7 +91,5 @@ export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
 
   addTodo() {
     this.store.addTodo(this.todoForm.value as unknown as TodoInterface); // 'as unknown' is used for any Partial interface types
-    // this.form.reset();
-    this.notificationService.openSnackBar(`Form submitted: ${this.todoForm.value.value} | Current Todo state: ${this.store.currentTodo.value()}`);
   }
 }

@@ -38,8 +38,10 @@ export function withTodosMethods() {
           return todoService.addItem(value).pipe(
             tapResponse({
               next: (item) =>
-                patchState(store, { items: [...store.items(), item] }),
-              error: console.error,
+                patchState(store, { items: [...store.items(), item], success: true, error: false, errorMessage: '' }),
+              error: (e: Error) => {
+                patchState(store, { error: true, errorMessage: e.message, success: false })
+              },
               finalize: () => patchState(store, { loading: false }),
             }),
           );
