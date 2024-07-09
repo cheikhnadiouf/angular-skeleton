@@ -12,7 +12,7 @@ export interface TodoState {
 export const initialState: TodoState = {
   items: [],
   currentTodo: {
-    value: 'hello',
+    value: '',
     done: false
   },
   loading: false,

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, inject } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
@@ -18,22 +18,24 @@ export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
   env = environment;
   title= "Todo widget"
   readonly store = inject(TodoStore);
-  private readonly formBuilder = inject(FormBuilder);
+
   progressBarVal = 0;
-  form = this.formBuilder.group({
-    value:  new FormControl( '', [Validators.required]),
-    done: new FormControl( false, []),
-  });
+  todoForm!: FormGroup;
 
   constructor(
     private titleService: Title,
-    private notificationService: NotificationService
-  ) {}
+    private notificationService: NotificationService,
+    private formBuilder: FormBuilder
+  ) {
+    this.todoForm = this.formBuilder.group({
+      value:  new FormControl( this.store.currentTodo.value(), [Validators.required]),
+      done: new FormControl( this.store.currentTodo.done(), []),
+    });
+  }
 
   ngOnInit(): void {
     //Called once, when the instance is created.
     this.titleService.setTitle(`${ this.title }`);
-
 
     setTimeout(() => {
       this.notificationService.openSnackBar('Welcome on Home page!');
@@ -49,7 +51,7 @@ export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   addTodo() {
-    this.store.addTodo(this.form.value as unknown as TodoInterface ); // 'as unknown' is used for any Partial interface types
+    this.store.addTodo(this.todoForm.value as unknown as TodoInterface ); // 'as unknown' is used for any Partial interface types
     // this.form.reset();
     this.notificationService.openSnackBar('Form submitted');
   }

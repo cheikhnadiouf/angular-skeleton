@@ -1,6 +1,6 @@
-# Angular 17+ Skeleton
+# Angular 18+ Skeleton
 ===
-Angular 17+ starter kit to develop a Single Page Application(SPA) using Angular material, NGRX Signals, Jest and Cypress.
+Angular 18+ starter kit to develop a Single Page Application(SPA) using Angular material, NGRX Signals, enhanced reactive forms, Jest and Cypress.
 - version alpha 0.1
 
 > **Alert note:**  This application is for demonstration purpose only and it is not intended for use in a specific production. It is too generic and not designed to be particularly efficient, stable, or secure. It does not support all the required features and specific needs of a complete production-ready solution !

@@ -13,7 +13,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   private _mobileQueryListener: () => void;
   mobileQuery: MediaQueryList;
   showSpinner: boolean = false;
-  title: string = "Angular 17+ skeleton";
+  title: string = "Angular 18+ skeleton";
 
   constructor(private changeDetectorRef: ChangeDetectorRef,
     private media: MediaMatcher,

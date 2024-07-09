@@ -1,10 +1,10 @@
 Features Roadmap
 ===
 
-# Angular 17+ skeleton
+# Angular 18+ skeleton
 ---
-Angular 17+ starter kit to develop a Single Page Application(SPA) using Angular material, NGRX Signals, Jest and Cypress.
-Project template starter with angular 17+ basic features, good practices and development toolkit for CICD, code format, linter, documentation, scaffolding, tests, security, performance audit and troubleshoots.
+Angular 18+ starter kit to develop a Single Page Application(SPA) using Angular material, NGRX Signals, enhanced reactive forms, Jest and Cypress.
+Project template starter with angular 18+ basic features, good practices and development toolkit for CICD, code format, linter, documentation, scaffolding, tests, security, performance audit and troubleshoots.
 
 # UX/UI design
 ---

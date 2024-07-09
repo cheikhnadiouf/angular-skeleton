@@ -1,40 +1,37 @@
 <mat-card appearance="outlined">
-    <mat-card-header appearance="outlined">
-      <h2>{{ title }}</h2>
-    </mat-card-header>
-    <mat-card-content appearance="outlined">
-      <form (ngSubmit)="addTodo()" [formGroup]="form">
-        <mat-form-field hintLabel="Min 1 characters" hideRequiredMarker>
-          <mat-label>Task</mat-label>
-          <input matInput #value minlength="1" appearance="outlined" placeholder="..." formControlName="value" 
-            id="form1" type="text" required />
-          <mat-hint align="end">{{ value.value?.length || 0 }}/1</mat-hint>
-        </mat-form-field>
-        <button mat-mini-fab [disabled]="form.invalid" type="submit"
-          aria-label="icon button"><mat-icon>arrow_right</mat-icon></button>
-      </form>
-    </mat-card-content>
-    <mat-card-footer appearance="" style="padding: 16px;">
-      <mat-progress-bar
-          [mode]="store.loading ? 'determinate' : 'indeterminate'" 
-          [value]="progressBarVal">
-      </mat-progress-bar>
-      <h5 class="mb-3">
-        Todo list: {{ store.doneCount() }}/{{
-        store.undoneCount()
-        }}
-        {{ store.percentageDone() | number : "1.0-0" }}% done
-      </h5>
-      <mat-list role="list" [style.opacity]="store.loading() ? '0.5' : 1">
-        @for (item of store.items().slice(1).slice(-5); track item.id) {
-        <mat-list-item role="listitem">
-          <mat-checkbox type="checkbox" [checked]="item.done" value="" aria-label="..."
-            (click)="store.updateTodo(item)">
-            {{ item.value }}
-          </mat-checkbox>
-          <button type="button" (click)="store.deleteTodo(item)" mat-mini-fab><mat-icon>delete</mat-icon></button>
-        </mat-list-item>
-        }
-      </mat-list>
-    </mat-card-footer>
-  </mat-card>
+  <mat-card-header appearance="outlined">
+    <h2>{{ title }}</h2>
+  </mat-card-header>
+  <mat-card-content appearance="outlined">
+    <form (ngSubmit)="addTodo()" [formGroup]="todoForm">
+      <mat-form-field hintLabel="Min 1 characters" hideRequiredMarker>
+        <mat-label>Task</mat-label>
+        <input matInput minlength="1" appearance="outlined" placeholder="..." formControlName="value" name="value"
+          type="text" required />
+        <mat-hint align="end">{{ todoForm.value.value?.length || 0 }}/1</mat-hint>
+      </mat-form-field>
+      <button mat-mini-fab [disabled]="todoForm.invalid" type="submit"
+        aria-label="icon button"><mat-icon>arrow_right</mat-icon></button>
+    </form>
+  </mat-card-content>
+  <mat-card-footer appearance="" style="padding: 16px;">
+    <mat-progress-bar [mode]="store.loading ? 'determinate' : 'indeterminate'" [value]="progressBarVal">
+    </mat-progress-bar>
+    <h5 class="mb-3">
+      Todo list: {{ store.doneCount() }}/{{
+      store.undoneCount()
+      }}
+      {{ store.percentageDone() | number : "1.0-0" }}% done
+    </h5>
+    <mat-list role="list" [style.opacity]="store.loading() ? '0.5' : 1">
+      @for (item of store.items().slice(1).slice(-5); track item.id) {
+      <mat-list-item role="listitem">
+        <mat-checkbox type="checkbox" [checked]="item.done" value="" aria-label="..." (click)="store.updateTodo(item)">
+          {{ item.value }}
+        </mat-checkbox>
+        <button type="button" (click)="store.deleteTodo(item)" mat-mini-fab><mat-icon>delete</mat-icon></button>
+      </mat-list-item>
+      }
+    </mat-list>
+  </mat-card-footer>
+</mat-card>

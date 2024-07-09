@@ -26,6 +26,7 @@ Changelog
 
 ## v0.1 Minor
 - [X] Task: Angular skeleton
+- [ ] Task: Enhanced reactive form
 - [X] Task: UX/UI Design
 - [X] Task: Backendless development API REST
 - [ ] Task: Backendless development WS Socket
