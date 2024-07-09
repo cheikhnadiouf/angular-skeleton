@@ -6,13 +6,15 @@
     <form (ngSubmit)="addTodo()" [formGroup]="todoForm">
       <mat-form-field hintLabel="Min 1 characters" hideRequiredMarker>
         <mat-label>Task</mat-label>
-        <input matInput minlength="1" appearance="outlined" placeholder="..." formControlName="value" name="value"
+        <input matInput minlength="1" appearance="outlined" placeholder="..." formControlName="value" id="value"
           type="text" required />
         <mat-hint align="end">{{ todoForm.value.value?.length || 0 }}/1</mat-hint>
       </mat-form-field>
-      <button mat-mini-fab [disabled]="todoForm.invalid" type="submit"
+      <button mat-mini-fab [disabled]="!todoForm.valid" type="submit"
         aria-label="icon button"><mat-icon>arrow_right</mat-icon></button>
     </form>
+    <hr>
+    <p>Form Status: {{ todoForm.status }}</p>
   </mat-card-content>
   <mat-card-footer appearance="" style="padding: 16px;">
     <mat-progress-bar [mode]="store.loading ? 'determinate' : 'indeterminate'" [value]="progressBarVal">
