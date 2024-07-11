@@ -40,13 +40,14 @@ export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
       if (state.error) {
         this.notificationService.openSnackBar(`Error: ${ state.errorMessage }`, 'red-snackbar');
         this.todoForm.get('value').setErrors({ serverError: true });
-      } 
-
-      if (state.success) {
+      } else if (state.success) {
         this.notificationService.openSnackBar(`Success: Form input: ${this.todoForm.value.value} | Current Todo state: ${this.store.currentTodo.value()}`, 'green-snackbar');
         this.todoForm.get('value').reset();
       }
-    });
+    },
+    // Writing to signals is not allowed in a `computed` or an `effect` by default. 
+    // Using `allowSignalWrites` in the `CreateEffectOptions` to enable this inside effects from input form binding
+    { allowSignalWrites: true });
   }
 
   ngOnInit(): void {
@@ -56,7 +57,7 @@ export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
     setTimeout(() => {
       this.notificationService.openSnackBar('Welcome on Home page!', 'green-snackbar');
     });
-
+    
     // Handle Unified Control State Change Events 
     this.todoForm.events
       .pipe(filter((event) => event instanceof ValueChangeEvent)) // ValueChangeEvent | StatusChangeEvent | PristineChangeEvent | TouchedChangeEvent 

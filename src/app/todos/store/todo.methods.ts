@@ -17,8 +17,10 @@ export function withTodosMethods() {
 
           return todoService.getItems().pipe(
             tapResponse({
-              next: (items) => patchState(store, { items }),
-              error: console.error,
+              next: (allItems) => patchState(store, { items: allItems, success: true, error: false, errorMessage: '' }),
+              error: (e: Error) => {
+                patchState(store, { error: true, errorMessage: e.message, success: false })
+              },
               finalize: () => patchState(store, { loading: false }),
             }),
           );
@@ -63,9 +65,12 @@ export function withTodosMethods() {
 
                 patchState(store, {
                   items: allItems,
+                  success: true, error: false, errorMessage: '' 
                 });
               },
-              error: console.error,
+              error: (e: Error) => {
+                patchState(store, { error: true, errorMessage: e.message, success: false })
+              },
               finalize: () => patchState(store, { loading: false }),
             }),
           );
@@ -81,9 +86,12 @@ export function withTodosMethods() {
               next: () => {
                 patchState(store, {
                   items: [...store.items().filter((x) => x.id !== todo.id)],
+                  success: true, error: false, errorMessage: '' 
                 });
               },
-              error: console.error,
+              error: (e: Error) => {
+                patchState(store, { error: true, errorMessage: e.message, success: false })
+              },
               finalize: () => patchState(store, { loading: false }),
             }),
           );
