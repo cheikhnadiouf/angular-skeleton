@@ -8,7 +8,7 @@
         <mat-label>Task</mat-label>
         <input matInput minlength="2" appearance="outlined" placeholder="..." formControlName="value" id="value"
           type="text" required />
-          <mat-hint style="color: red" align="end" *ngIf="todoForm.get('value').invalid && (todoForm.get('value').dirty || todoForm.get('value').touched)">
+          <mat-hint style="color: red" align="end" *ngIf="todoForm.get('value').errors || todoForm.get('value').invalid && (todoForm.get('value').dirty || todoForm.get('value').touched)">
               <span *ngIf="todoForm.get('value').errors?.['required']"> Value is required.
               </span>
               <span *ngIf="todoForm.get('value').errors?.['minlength']"> At least 2 characters: {{ todoForm.value.value?.length || 0 }}/2 .
