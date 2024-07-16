@@ -24,4 +24,4 @@ Docs, guidelines with Markdown and diagrams with Mermaid.
 
 # Reactive state management
 ---
-a reactive solution using Rxjs and @ngrx/signals (NGRX store with Angular Signals).
+a reactive solution using Rxjs, signals and optional @ngrx/signals (NGRX store with Angular Signals).

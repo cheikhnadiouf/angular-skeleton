@@ -4,18 +4,18 @@ import { expect } from '@jest/globals';
 
 import { provideMock } from '../../../../testing/auto-mock';
 import { TodoInterface } from '../todo.interface';
-import { TodoService } from '../todo.service';
+import { TodoStoreService } from './todo-store/todo-store.service';
 import { TodoStore } from './todo.state';
 
 describe('TodoStore', () => {
-  let service: TodoService;
+  let service: TodoStoreService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [TodoStore, provideMock(TodoService)],
+      providers: [TodoStore, provideMock(TodoStoreService)],
     });
 
-    service = TestBed.inject(TodoService);
+    service = TestBed.inject(TodoStoreService);
   });
 
   describe('with Methods', () => {

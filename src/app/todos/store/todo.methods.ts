@@ -3,19 +3,20 @@ import { tapResponse } from '@ngrx/operators';
 import { patchState, signalStoreFeature, type, withMethods } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { switchMap } from 'rxjs';
+
 import { TodoInterface } from '../todo.interface';
-import { TodoService } from '../todo.service';
 import { TodoState } from './todo.state';
+import { TodoStoreService } from './todo-store/todo-store.service';
 
 export function withTodosMethods() {
   return signalStoreFeature(
     { state: type<TodoState>() },
-    withMethods((store, todoService = inject(TodoService)) => ({
+    withMethods((store, todoStoreService = inject(TodoStoreService)) => ({
       loadAllTodos: rxMethod(
         switchMap(() => {
           patchState(store, { loading: true });
 
-          return todoService.getItems().pipe(
+          return todoStoreService.getItems().pipe(
             tapResponse({
               next: (allItems) => patchState(store, { items: allItems, success: true, error: false, errorMessage: '' }),
               error: (e: Error) => {
@@ -29,7 +30,7 @@ export function withTodosMethods() {
       async loadAllTodosByPromise() {
         patchState(store, { loading: true });
 
-        const items = await todoService.getItemsAsPromise();
+        const items = await todoStoreService.getItemsAsPromise();
 
         patchState(store, { items, loading: false });
       },
@@ -37,7 +38,7 @@ export function withTodosMethods() {
         switchMap((value) => {
           patchState(store, { loading: true });
 
-          return todoService.addItem(value).pipe(
+          return todoStoreService.addItem(value).pipe(
             tapResponse({
               next: (item) =>
                 patchState(store, { items: [...store.items(), item], success: true, error: false, errorMessage: '' }),
@@ -55,7 +56,7 @@ export function withTodosMethods() {
 
           const toSend = { ...todo, done: !todo.done };
 
-          return todoService.updateItem(toSend).pipe(
+          return todoStoreService.updateItem(toSend).pipe(
             tapResponse({
               next: (updatedTodo) => {
                 const allItems = [...store.items()];
@@ -65,7 +66,7 @@ export function withTodosMethods() {
 
                 patchState(store, {
                   items: allItems,
-                  success: true, error: false, errorMessage: '' 
+                  success: true, error: false, errorMessage: ''
                 });
               },
               error: (e: Error) => {
@@ -81,12 +82,12 @@ export function withTodosMethods() {
         switchMap((todo) => {
           patchState(store, { loading: true });
 
-          return todoService.deleteItem(todo).pipe(
+          return todoStoreService.deleteItem(todo).pipe(
             tapResponse({
               next: () => {
                 patchState(store, {
                   items: [...store.items().filter((x) => x.id !== todo.id)],
-                  success: true, error: false, errorMessage: '' 
+                  success: true, error: false, errorMessage: ''
                 });
               },
               error: (e: Error) => {
