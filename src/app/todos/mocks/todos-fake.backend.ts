@@ -115,7 +115,7 @@ export class TodosBackendLessInterceptor implements HttpInterceptor {
       }
       todos = todos.filter((x) => x.id !== idFromUrl());
       localStorage.setItem(todosKey, JSON.stringify(todos));
-      return ok();
+      return ok(basicDetails(todo));
     }
 
     // helper functions

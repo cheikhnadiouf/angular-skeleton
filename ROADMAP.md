@@ -3,7 +3,7 @@ Features Roadmap
 
 # Angular 18+ skeleton
 ---
-Angular 18+ starter kit to develop a Single Page Application(SPA) using Angular material, NGRX Signals, enhanced reactive forms, Jest and Cypress.
+Angular 18+ starter kit to develop a Single Page Application(SPA) using Angular material, State management with signals, enhanced reactive forms, NGRX Signals (optional), Jest and Cypress.
 Project template starter with angular 18+ basic features, good practices and development toolkit for CICD, code format, linter, documentation, scaffolding, tests, security, performance audit and troubleshoots.
 
 # UX/UI design
