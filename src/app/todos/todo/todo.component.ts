@@ -71,10 +71,6 @@ export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
         this.notificationService.openSnackBar(`Empty data`, 'red-snackbar');
       }
 
-      // Reset form notifications
-      // this.errorMessage = '';
-      // this.todoForm.get('value').setErrors({ serverError: false });
-
     },
       // Writing to signals is not allowed in a `computed` or an `effect` by default. 
       // Using `allowSignalWrites` in the `CreateEffectOptions` to enable this inside effects from input form binding with signals
@@ -145,7 +141,7 @@ export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
           this.todosSignal.set({ ...this.todosSignal(), items: data, loading: false });
           console.debug('set todosSignal', this.todosSignal());
           this.errorMessage = '';
-          this.todoForm.get('value').setErrors({ serverError: false });
+          this.todoForm.get('value').setErrors(null);
           this.notificationService.openSnackBar('Data fetching success', 'green-snackbar');
         },
         error: (error) => {
@@ -183,7 +179,7 @@ export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
 
             console.debug('set todosSignal', this.todosSignal());
             this.errorMessage = '';
-            this.todoForm.get('value').setErrors({ serverError: false });
+            this.todoForm.get('value').setErrors(null);
             this.notificationService.openSnackBar('Data update success', 'green-snackbar');
           },
           error: (error) => {
@@ -222,7 +218,7 @@ export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
 
             console.debug('set todosSignal', this.todosSignal());
             this.errorMessage = '';
-            this.todoForm.get('value').setErrors({ serverError: false });
+            this.todoForm.get('value').setErrors(null);
             this.notificationService.openSnackBar('Data update success', 'green-snackbar');
           },
           error: (error) => {
@@ -258,7 +254,7 @@ export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
 
             console.debug('set todosSignal', this.todosSignal());
             this.errorMessage = '';
-            this.todoForm.get('value').setErrors({ serverError: false });
+            this.todoForm.get('value').setErrors(null);
             this.notificationService.openSnackBar('Data update success', 'green-snackbar');
           },
           error: (error) => {
