@@ -64,7 +64,7 @@ export class TodosBackendLessInterceptor implements HttpInterceptor {
     function getTodoById() {
       const todo = todos.find((x) => x.id === idFromUrl());
       if (!todo) {
-        throw Error(`Todo with the id ${idFromUrl()} do not exist`);
+        return error(`Todo with the id ${idFromUrl()} do not exist`);
       }
       return ok(basicDetails(todo));
     }
@@ -74,7 +74,7 @@ export class TodosBackendLessInterceptor implements HttpInterceptor {
 
       // Check if already exist
       if (todos.find((x) => x.value === todo.value)) {
-        throw Error(`Todo with the value ${todo.value} already exists`);
+        return error(`Todo with the value ${todo.value} already exists`);
       }
 
       // assign todo id and a few other properties then save
@@ -93,7 +93,7 @@ export class TodosBackendLessInterceptor implements HttpInterceptor {
         params.value !== todo.value &&
         todos.find((x) => x.value === params.value)
       ) {
-        throw Error(`Todo with the value ${params.value} already exists`);
+        return error(`Todo with the value ${params.value} already exists`);
       }
 
       // only update password if entered
@@ -111,7 +111,7 @@ export class TodosBackendLessInterceptor implements HttpInterceptor {
     function deleteTodo() {
       const todo = todos.find((x) => x.id === idFromUrl());
       if (!todo) {
-        throw Error(`Todo with the id ${idFromUrl()} do not exist`);
+        return error(`Todo with the id ${idFromUrl()} do not exist`);
       }
       todos = todos.filter((x) => x.id !== idFromUrl());
       localStorage.setItem(todosKey, JSON.stringify(todos));
@@ -124,9 +124,9 @@ export class TodosBackendLessInterceptor implements HttpInterceptor {
       return of(new HttpResponse({ status: 200, body })).pipe(delay(500)); // delay observable to simulate server api call
     }
 
-    function error(message: any) {
+    function error(message: any, statusCode: number = 500) {
       console.error(message);
-      return throwError({ status: 500, error: { message } }).pipe(
+      return throwError(() => { return { status: statusCode, message: message } }).pipe(
         materialize(),
         delay(500),
         dematerialize(),
