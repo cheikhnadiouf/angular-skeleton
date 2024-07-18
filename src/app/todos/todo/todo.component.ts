@@ -118,6 +118,7 @@ export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
     //Called once, before the instance is destroyed.
   }
 
+  // Troubleshoot for angular material checkbox event
   handleInputCheckbox(event: Event, item) {
     const input = event?.target as HTMLInputElement;
     // console.debug(input?.checked);

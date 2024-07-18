@@ -25,7 +25,7 @@ export class TodoStoreService {
     return this.http.get<TodoInterface>(`${this.url}/${id}`);
   }
 
-  addItem(value: TodoInterface) {
+  createItem(value: TodoInterface) {
     return this.http.post<TodoInterface>(this.url, value);
   }
 

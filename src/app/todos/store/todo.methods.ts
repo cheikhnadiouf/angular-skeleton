@@ -38,7 +38,7 @@ export function withTodosMethods() {
         switchMap((value) => {
           patchState(store, { loading: true });
 
-          return todoStoreService.addItem(value).pipe(
+          return todoStoreService.createItem(value).pipe(
             tapResponse({
               next: (item) =>
                 patchState(store, { items: [...store.items(), item], success: true, error: false, errorMessage: '' }),
