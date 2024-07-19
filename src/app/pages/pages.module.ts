@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { HomeComponent } from './home/home.component';
+import { NgrxComponent } from './ngrx/ngrx.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { TodosModule } from '../todos/todos.module';
 
 @NgModule({
-  declarations: [HomeComponent, NotFoundComponent],
+  declarations: [HomeComponent, NgrxComponent, NotFoundComponent],
   imports: [
     CommonModule,
     SharedModule.forRoot(), // Share components and unique instance of a service beetween modules

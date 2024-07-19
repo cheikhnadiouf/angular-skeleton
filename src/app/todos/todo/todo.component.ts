@@ -82,7 +82,7 @@ export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
     this.titleService.setTitle(`${this.title}`);
 
     setTimeout(() => {
-      this.notificationService.openSnackBar('Welcome on Home page!', 'green-snackbar');
+      this.notificationService.openSnackBar('Welcome on Todo page!', 'green-snackbar');
     });
 
     // Data fetching

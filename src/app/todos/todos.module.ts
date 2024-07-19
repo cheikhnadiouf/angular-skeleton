@@ -3,18 +3,21 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 
 import { TodoComponent } from './todo/todo.component';
+import { TodoStoreComponent } from './store/todo-store/todo-store.component';
 
 
 @NgModule({
   declarations: [
-    TodoComponent
+    TodoComponent,
+    TodoStoreComponent
   ],
   imports: [
     CommonModule,
     SharedModule.forRoot(), // Share components and unique instance of a service beetween modules
   ],
   exports: [
-    TodoComponent
+    TodoComponent,
+    TodoStoreComponent
   ]
 })
 export class TodosModule { }

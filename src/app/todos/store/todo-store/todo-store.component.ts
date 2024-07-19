@@ -11,11 +11,11 @@ import { TodoInterface } from '../../todo.interface';
 import { getState, patchState } from '@ngrx/signals';
 
 @Component({
-  selector: 'app-todo',
+  selector: 'app-todo-store',
   templateUrl: './todo-store.component.html',
   styleUrl: './todo-store.component.css'
 })
-export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
+export class TodoStoreComponent implements OnInit, OnDestroy, AfterViewInit {
   env = environment;
   title = "Todo widget"
   readonly store = inject(TodoStore);
@@ -57,7 +57,7 @@ export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
     this.titleService.setTitle(`${this.title}`);
 
     setTimeout(() => {
-      this.notificationService.openSnackBar('Welcome on Home page!', 'green-snackbar');
+      this.notificationService.openSnackBar('Welcome on Todo store page!', 'green-snackbar');
     });
     
     // Handle Unified Control State Change Events 
