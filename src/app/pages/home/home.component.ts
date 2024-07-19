@@ -15,7 +15,7 @@ import { delay } from 'rxjs';
 })
 export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   env = environment;
-  title= "Home page"
+  title= "Default page"
   readonly store = inject(TodoStore);
   private readonly formBuilder = inject(FormBuilder);
   progressBarVal = 0;
@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     this.titleService.setTitle(`${ this.title }`);
 
     setTimeout(() => {
-      this.notificationService.openSnackBar('Welcome on Home page!');
+      this.notificationService.openSnackBar('Welcome on Default page!');
     });
   }
 
