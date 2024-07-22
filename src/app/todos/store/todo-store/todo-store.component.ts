@@ -7,7 +7,7 @@ import { NotificationService } from '../../../shared/services/notification.servi
 import { TodoStore } from '../../../todos/store/todo.state';
 import { delay, filter } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-import { TodoInterface } from '../../todo.interface';
+import { TodoInterface } from '../../models/todo.interface';
 import { getState, patchState } from '@ngrx/signals';
 
 @Component({

@@ -1,5 +1,5 @@
 import { signalStore, withHooks, withState } from '@ngrx/signals';
-import { TodoInterface } from '../todo.interface';
+import { TodoInterface } from '../models/todo.interface';
 import { withTodosMethods } from './todo.methods';
 import { withTodosSelectors } from './todo.selectors';
 

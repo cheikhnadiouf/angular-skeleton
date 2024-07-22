@@ -3,13 +3,13 @@ import { FormBuilder, FormControl, FormGroup, Validators, ValueChangeEvent } fro
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
-import { NotificationService } from '../../shared/services/notification.service';
-import { TodoStore } from '../../todos/store/todo.state';
+import { NotificationService } from '../../../shared/services/notification.service';
+import { TodoStore } from '../../store/todo.state';
 import { catchError, delay, filter, of, retry } from 'rxjs';
-import { environment } from '../../../environments/environment';
-import { TodoInterface } from '../todo.interface';
-import { initialState, TodoState } from '../todo.state';
-import { TodoService } from '../todo.service';
+import { environment } from '../../../../environments/environment';
+import { TodoInterface } from '../../models/todo.interface';
+import { initialState, TodoState } from '../../models/todo.state';
+import { TodoService } from '../../services/todo.service';
 
 @Component({
   selector: 'app-todo',
@@ -181,7 +181,7 @@ export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
             console.debug('set todosSignal', this.todosSignal());
             this.errorMessage = '';
             this.todoForm.get('value').setErrors(null);
-            this.notificationService.openSnackBar('Data update success', 'green-snackbar');
+            this.notificationService.openSnackBar('Data create success', 'green-snackbar');
           },
           error: (error) => {
             this.todosSignal.set({ ...this.todosSignal(), loading: false });
@@ -256,7 +256,7 @@ export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
             console.debug('set todosSignal', this.todosSignal());
             this.errorMessage = '';
             this.todoForm.get('value').setErrors(null);
-            this.notificationService.openSnackBar('Data update success', 'green-snackbar');
+            this.notificationService.openSnackBar('Data delete success', 'green-snackbar');
           },
           error: (error) => {
             this.todosSignal.set({ ...this.todosSignal(), loading: false });

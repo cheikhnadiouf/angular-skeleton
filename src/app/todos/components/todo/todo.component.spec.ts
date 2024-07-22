@@ -3,7 +3,7 @@ import { expect } from '@jest/globals';
 import { Title } from '@angular/platform-browser';
 
 import { TodoComponent } from './todo.component';
-import { NotificationService } from '../../shared/services/notification.service';
+import { NotificationService } from '../../../shared/services/notification.service';
 
 describe('TodoComponent', () => {
   let component: TodoComponent;

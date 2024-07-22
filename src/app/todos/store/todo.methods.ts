@@ -4,7 +4,7 @@ import { patchState, signalStoreFeature, type, withMethods } from '@ngrx/signals
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { switchMap } from 'rxjs';
 
-import { TodoInterface } from '../todo.interface';
+import { TodoInterface } from '../models/todo.interface';
 import { TodoState } from './todo.state';
 import { TodoStoreService } from './todo-store/todo-store.service';
 

@@ -17,7 +17,7 @@
               </span>
           </mat-hint>
       </mat-form-field>
-      <button mat-mini-fab [disabled]="!todoForm.valid" type="submit"
+      <button id="add" mat-mini-fab [disabled]="!todoForm.valid" type="submit"
         aria-label="icon button"><mat-icon>arrow_right</mat-icon></button>
     </form>
     
@@ -40,7 +40,7 @@
     <mat-list role="list" [style.opacity]="todosSignal().loading ? '0.5' : 1">
       @for (item of todosSignal().items.slice(1).slice(-5); track item.id) {
       <mat-list-item role="listitem">
-        <mat-checkbox type="checkbox" [checked]="item.done" (input)="handleInputCheckbox($event, item)" value="" aria-label="...">
+        <mat-checkbox [id]="item.id" type="checkbox" [checked]="item.done" (input)="handleInputCheckbox($event, item)" value="" aria-label="...">
           {{ item.value }}
         </mat-checkbox>
         <button type="button" (click)="deleteTodo(item)" mat-mini-fab><mat-icon>delete</mat-icon></button>

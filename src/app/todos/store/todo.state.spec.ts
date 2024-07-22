@@ -3,7 +3,7 @@ import { of } from 'rxjs';
 import { expect } from '@jest/globals';
 
 import { provideMock } from '../../../../testing/auto-mock';
-import { TodoInterface } from '../todo.interface';
+import { TodoInterface } from '../models/todo.interface';
 import { TodoStoreService } from './todo-store/todo-store.service';
 import { TodoStore } from './todo.state';
 

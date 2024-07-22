@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { catchError, lastValueFrom, Observable, retry, throwError } from 'rxjs';
-import { TodoInterface } from '../../todo.interface';
+import { TodoInterface } from '../../models/todo.interface';
 import { environment } from '../../../../environments/environment';
 
 
