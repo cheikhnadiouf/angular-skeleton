@@ -152,10 +152,6 @@ Run `npm run start` or `ng serve` for a dev server. Navigate to `http://localhos
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-Further IDE tools: 
-  - In your edited file, type with autocompletion `sm-` to generate a new template. 
-  - For template folder, Use Vscode addon `Template generator`'s procedure.
-
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `www/` directory. Use the `--prod` flag for a production build.
