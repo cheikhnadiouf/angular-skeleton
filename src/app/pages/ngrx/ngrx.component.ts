@@ -1,6 +1,12 @@
 import { environment } from '../../../environments/environment';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit, OnDestroy, AfterViewInit, inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  AfterViewInit,
+  inject,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
@@ -15,7 +21,7 @@ import { delay } from 'rxjs';
 })
 export class NgrxComponent implements OnInit, OnDestroy, AfterViewInit {
   env = environment;
-  title= "Ngrx page"
+  title = 'Ngrx page';
   readonly store = inject(TodoStore);
   private readonly formBuilder = inject(FormBuilder);
   progressBarVal = 0;
@@ -28,12 +34,12 @@ export class NgrxComponent implements OnInit, OnDestroy, AfterViewInit {
     private route: ActivatedRoute,
     private router: Router,
     private titleService: Title,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
   ) {}
 
   ngOnInit(): void {
     //Called once, when the instance is created.
-    this.titleService.setTitle(`${ this.title }`);
+    this.titleService.setTitle(`${this.title}`);
 
     setTimeout(() => {
       this.notificationService.openSnackBar('Welcome on Ngrx page!');
@@ -47,5 +53,4 @@ export class NgrxComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
   }
-
 }

@@ -1,7 +1,6 @@
 describe('Todos page test', () => {
-
   beforeEach(() => {
-    cy.visit('/pages/home')
+    cy.visit('/pages/home');
   });
 
   // Action buttons
@@ -12,7 +11,7 @@ describe('Todos page test', () => {
   // Query
   it('should query items', () => {
     cy.get('.mat-mdc-snack-bar-label').should('exist');
-    cy.contains('Data fetching success');    
+    cy.contains('Data fetching success');
   });
 
   // Create
@@ -20,7 +19,7 @@ describe('Todos page test', () => {
     cy.get('#value').type('Test item');
     cy.get('#add').click();
     cy.get('.mat-mdc-snack-bar-label').should('exist');
-    cy.contains('Data create success');    
+    cy.contains('Data create success');
   });
 
   // Read

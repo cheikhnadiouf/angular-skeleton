@@ -1,5 +1,18 @@
-import { Component, OnInit, OnDestroy, AfterViewInit, inject, effect } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators, ValueChangeEvent } from '@angular/forms';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  AfterViewInit,
+  inject,
+  effect,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+  ValueChangeEvent,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
@@ -13,11 +26,11 @@ import { getState, patchState } from '@ngrx/signals';
 @Component({
   selector: 'app-todo-store',
   templateUrl: './todo-store.component.html',
-  styleUrl: './todo-store.component.css'
+  styleUrl: './todo-store.component.css',
 })
 export class TodoStoreComponent implements OnInit, OnDestroy, AfterViewInit {
   env = environment;
-  title = "Todo widget"
+  title = 'Todo widget';
   readonly store = inject(TodoStore);
 
   progressBarVal = 0;
@@ -26,30 +39,40 @@ export class TodoStoreComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private titleService: Title,
     private notificationService: NotificationService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
   ) {
     this.todoForm = this.formBuilder.group({
-      value: new FormControl<string | null>(this.store.currentTodo.value(), [Validators.required]),
+      value: new FormControl<string | null>(this.store.currentTodo.value(), [
+        Validators.required,
+      ]),
       done: new FormControl<boolean>(this.store.currentTodo.done(), []),
     });
 
-    effect(() => {
-      // 👇 The effect will be re-executed whenever the state changes.
-      const state = getState(this.store);
-      console.log('Todo state changed', state);
-      if (state.error) {
-        this.notificationService.openSnackBar(`Error: ${ state.errorMessage }`, 'red-snackbar');
-        this.todoForm.get('value').setErrors({ serverError: true });
-      } 
+    effect(
+      () => {
+        // 👇 The effect will be re-executed whenever the state changes.
+        const state = getState(this.store);
+        console.log('Todo state changed', state);
+        if (state.error) {
+          this.notificationService.openSnackBar(
+            `Error: ${state.errorMessage}`,
+            'red-snackbar',
+          );
+          this.todoForm.get('value').setErrors({ serverError: true });
+        }
 
-      if (state.success) {
-        this.notificationService.openSnackBar(`Success: Form input: ${this.todoForm.value.value} | Current Todo state: ${this.store.currentTodo.value()}`, 'green-snackbar');
-        this.todoForm.get('value').reset();
-      }
-    },
-    // Writing to signals is not allowed in a `computed` or an `effect` by default. 
-    // Using `allowSignalWrites` in the `CreateEffectOptions` to enable this inside effects from input form binding with signals
-    { allowSignalWrites: true });
+        if (state.success) {
+          this.notificationService.openSnackBar(
+            `Success: Form input: ${this.todoForm.value.value} | Current Todo state: ${this.store.currentTodo.value()}`,
+            'green-snackbar',
+          );
+          this.todoForm.get('value').reset();
+        }
+      },
+      // Writing to signals is not allowed in a `computed` or an `effect` by default.
+      // Using `allowSignalWrites` in the `CreateEffectOptions` to enable this inside effects from input form binding with signals
+      { allowSignalWrites: true },
+    );
   }
 
   ngOnInit(): void {
@@ -57,12 +80,15 @@ export class TodoStoreComponent implements OnInit, OnDestroy, AfterViewInit {
     this.titleService.setTitle(`${this.title}`);
 
     setTimeout(() => {
-      this.notificationService.openSnackBar('Welcome on Todo store page!', 'green-snackbar');
+      this.notificationService.openSnackBar(
+        'Welcome on Todo store page!',
+        'green-snackbar',
+      );
     });
-    
-    // Handle Unified Control State Change Events 
+
+    // Handle Unified Control State Change Events
     this.todoForm.events
-      .pipe(filter((event) => event instanceof ValueChangeEvent)) // ValueChangeEvent | StatusChangeEvent | PristineChangeEvent | TouchedChangeEvent 
+      .pipe(filter((event) => event instanceof ValueChangeEvent)) // ValueChangeEvent | StatusChangeEvent | PristineChangeEvent | TouchedChangeEvent
       .subscribe({
         next: (event: ValueChangeEvent<unknown>) => {
           this.todoForm.get('value').setErrors(null);
@@ -77,7 +103,7 @@ export class TodoStoreComponent implements OnInit, OnDestroy, AfterViewInit {
             currentTodo: event.value,
             error: false,
             errorMessage: '',
-            success: false
+            success: false,
           });
           console.log(event);
         },

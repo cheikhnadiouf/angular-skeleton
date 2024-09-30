@@ -1,6 +1,6 @@
-export type BaseEntity = { 
-  id: string,
-  active: boolean
+export type BaseEntity = {
+  id: string;
+  active: boolean;
 };
 
 export interface TodoInterface extends BaseEntity {

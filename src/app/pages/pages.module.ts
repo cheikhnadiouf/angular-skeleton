@@ -14,8 +14,8 @@ import { TodosModule } from '../todos/todos.module';
     CommonModule,
     SharedModule.forRoot(), // Share components and unique instance of a service beetween modules
     TodosModule,
-    PagesRoutingModule // MUST COME LAST AFTER ROUTED MODULES RESOURCES:
+    PagesRoutingModule, // MUST COME LAST AFTER ROUTED MODULES RESOURCES:
     // The order of route configuration is important because the router accepts the first route that matches a navigation request path
-  ]
+  ],
 })
-export class PagesModule { }
+export class PagesModule {}

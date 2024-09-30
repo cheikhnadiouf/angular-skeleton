@@ -1,5 +1,20 @@
-import { Component, OnInit, OnDestroy, AfterViewInit, inject, effect, signal, computed } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators, ValueChangeEvent } from '@angular/forms';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  AfterViewInit,
+  inject,
+  effect,
+  signal,
+  computed,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+  ValueChangeEvent,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
@@ -14,21 +29,25 @@ import { TodoService } from '../../services/todo.service';
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
-  styleUrl: './todo.component.css'
+  styleUrl: './todo.component.css',
 })
 export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
   env = environment;
-  title = "Todo widget";
-  errorMessage = "";
+  title = 'Todo widget';
+  errorMessage = '';
   progressBarVal = 0;
   todoForm!: FormGroup;
 
   // manage states with signals
   todosSignal = signal<Partial<TodoState>>(null); // set null initial value
 
-  todoState = this.todosSignal()
-  doneCount = computed(() => this.todosSignal().items.filter((x) => x.done).length);
-  undoneCount = computed(() => this.todosSignal().items.filter((x) => !x.done).length);
+  todoState = this.todosSignal();
+  doneCount = computed(
+    () => this.todosSignal().items.filter((x) => x.done).length,
+  );
+  undoneCount = computed(
+    () => this.todosSignal().items.filter((x) => !x.done).length,
+  );
   percentageDone = computed(() => {
     const done = this.todosSignal().items.filter((x) => x.done).length;
     const total = this.todosSignal().items.length;
@@ -41,40 +60,43 @@ export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
   });
   lastTodo = computed(() => {
     const total = this.todosSignal().items.length;
-    const lastItem = (total > 0) ? this.todosSignal().items[total - 1] : { value: '' };
+    const lastItem =
+      total > 0 ? this.todosSignal().items[total - 1] : { value: '' };
     return lastItem;
   });
-
-
 
   constructor(
     private titleService: Title,
     private notificationService: NotificationService,
     private formBuilder: FormBuilder,
-    private todoService: TodoService
+    private todoService: TodoService,
   ) {
     // Initialize Signal values
     this.todosSignal.set(initialState);
 
     // Initialize form input values
     this.todoForm = this.formBuilder.group({
-      value: new FormControl<string | null>(this.todosSignal().currentItem.value, [Validators.required]),
+      value: new FormControl<string | null>(
+        this.todosSignal().currentItem.value,
+        [Validators.required],
+      ),
       done: new FormControl<boolean>(this.todosSignal().currentItem.done, []),
     });
 
-    effect(() => {
-      // 👇 The effect will be re-executed whenever the state changes.
+    effect(
+      () => {
+        // 👇 The effect will be re-executed whenever the state changes.
 
-      const itemsLength: number = this.todosSignal().items.length;
-      console.debug('Todo state changed', this.todosSignal());
-      if (itemsLength == 0) {
-        this.notificationService.openSnackBar(`Empty data`, 'red-snackbar');
-      }
-
-    },
-      // Writing to signals is not allowed in a `computed` or an `effect` by default. 
+        const itemsLength: number = this.todosSignal().items.length;
+        console.debug('Todo state changed', this.todosSignal());
+        if (itemsLength == 0) {
+          this.notificationService.openSnackBar(`Empty data`, 'red-snackbar');
+        }
+      },
+      // Writing to signals is not allowed in a `computed` or an `effect` by default.
       // Using `allowSignalWrites` in the `CreateEffectOptions` to enable this inside effects from input form binding with signals
-      { allowSignalWrites: true });
+      { allowSignalWrites: true },
+    );
   }
 
   ngOnInit(): void {
@@ -82,15 +104,18 @@ export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
     this.titleService.setTitle(`${this.title}`);
 
     setTimeout(() => {
-      this.notificationService.openSnackBar('Welcome on Todo page!', 'green-snackbar');
+      this.notificationService.openSnackBar(
+        'Welcome on Todo page!',
+        'green-snackbar',
+      );
     });
 
     // Data fetching
     this.queryTodos();
 
-    // Handle Unified Control State Change Events 
+    // Handle Unified Control State Change Events
     this.todoForm.events
-      .pipe(filter((event) => event instanceof ValueChangeEvent)) // ValueChangeEvent | StatusChangeEvent | PristineChangeEvent | TouchedChangeEvent 
+      .pipe(filter((event) => event instanceof ValueChangeEvent)) // ValueChangeEvent | StatusChangeEvent | PristineChangeEvent | TouchedChangeEvent
       .subscribe({
         next: (event: ValueChangeEvent<unknown>) => {
           this.todoForm.get('value').setErrors(null);
@@ -100,12 +125,12 @@ export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
           // this.todoForm.get('value').markAsTouched();
           // this.todoForm.get('value').setErrors({ incorrect: true });
 
-          // To synchronize form update with signal state          
+          // To synchronize form update with signal state
           this.todosSignal.set({
             ...this.todosSignal(),
-            currentItem: event.value
+            currentItem: event.value,
           });
-          console.debug("State Change Event: ", event);
+          console.debug('State Change Event: ', event);
         },
       });
   }
@@ -125,7 +150,7 @@ export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
     const updatedTodo: Partial<TodoInterface> = {
       // id: Date.now().toString(),
       ...item,
-      done: input?.checked
+      done: input?.checked,
     };
     this.todosSignal.set({ ...this.todosSignal(), currentItem: updatedTodo });
     this.updateTodo(updatedTodo as TodoInterface);
@@ -133,27 +158,38 @@ export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
 
   queryTodos() {
     this.todosSignal.set({ ...this.todosSignal(), loading: true });
-    this.todoService.getItems()
+    this.todoService
+      .getItems()
       .pipe(retry(3))
       .subscribe({
         next: (data) => {
           // subscribe to a signal to receive updates.
           console.debug('Data fetching:', data);
-          this.todosSignal.set({ ...this.todosSignal(), items: data, loading: false });
+          this.todosSignal.set({
+            ...this.todosSignal(),
+            items: data,
+            loading: false,
+          });
           console.debug('set todosSignal', this.todosSignal());
           this.errorMessage = '';
           this.todoForm.get('value').setErrors(null);
-          this.notificationService.openSnackBar('Data fetching success', 'green-snackbar');
+          this.notificationService.openSnackBar(
+            'Data fetching success',
+            'green-snackbar',
+          );
         },
         error: (error) => {
           this.todosSignal.set({ ...this.todosSignal(), loading: false });
           this.errorMessage = this.todoService.handleError(error);
-          this.notificationService.openSnackBar(`Error: ${this.errorMessage}`, 'red-snackbar');
+          this.notificationService.openSnackBar(
+            `Error: ${this.errorMessage}`,
+            'red-snackbar',
+          );
           this.todoForm.get('value').setErrors({ serverError: true });
           console.error('Error fetching :', error);
           // return of([]);
         },
-        complete: () => console.debug('Request complete')
+        complete: () => console.debug('Request complete'),
       });
   }
 
@@ -162,111 +198,142 @@ export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
     const newTodo: Partial<TodoInterface> = {
       // id: Date.now().toString(),
       value: this.todoForm.get('value').value,
-      done: this.todoForm.get('done').value
+      done: this.todoForm.get('done').value,
     };
-    this.todoService.createItem(newTodo as TodoInterface)
+    this.todoService
+      .createItem(newTodo as TodoInterface)
       .pipe(retry(2))
-      .subscribe(
-        {
-          next: (data: TodoInterface) => {
-            // subscribe to a signal to receive updates.
-            console.debug('Data fetching:', data);
-            // Add new data item only
-            let items: TodoInterface[] = this.todosSignal().items;
-            items.push(data);
-            this.todosSignal.set({ ...this.todosSignal(), items: items, loading: false });
-            // Or update all items
-            // this.queryTodos()
+      .subscribe({
+        next: (data: TodoInterface) => {
+          // subscribe to a signal to receive updates.
+          console.debug('Data fetching:', data);
+          // Add new data item only
+          let items: TodoInterface[] = this.todosSignal().items;
+          items.push(data);
+          this.todosSignal.set({
+            ...this.todosSignal(),
+            items: items,
+            loading: false,
+          });
+          // Or update all items
+          // this.queryTodos()
 
-            console.debug('set todosSignal', this.todosSignal());
-            this.errorMessage = '';
-            this.todoForm.get('value').setErrors(null);
-            this.notificationService.openSnackBar('Data create success', 'green-snackbar');
-          },
-          error: (error) => {
-            this.todosSignal.set({ ...this.todosSignal(), loading: false });
-            this.errorMessage = this.todoService.handleError(error);
-            this.notificationService.openSnackBar(`Error: ${this.errorMessage}`, 'red-snackbar');
-            this.todoForm.get('value').setErrors({ serverError: true });
-            console.error('Error fetching :', error);
-            return of(null);
-          },
-          complete: () => console.debug('Request complete')
-        }
-      );
+          console.debug('set todosSignal', this.todosSignal());
+          this.errorMessage = '';
+          this.todoForm.get('value').setErrors(null);
+          this.notificationService.openSnackBar(
+            'Data create success',
+            'green-snackbar',
+          );
+        },
+        error: (error) => {
+          this.todosSignal.set({ ...this.todosSignal(), loading: false });
+          this.errorMessage = this.todoService.handleError(error);
+          this.notificationService.openSnackBar(
+            `Error: ${this.errorMessage}`,
+            'red-snackbar',
+          );
+          this.todoForm.get('value').setErrors({ serverError: true });
+          console.error('Error fetching :', error);
+          return of(null);
+        },
+        complete: () => console.debug('Request complete'),
+      });
   }
 
   updateTodo(todo: TodoInterface) {
     this.todosSignal.set({ ...this.todosSignal(), loading: true });
-    this.todoService.updateItem(todo)
-      .pipe(
-        retry(2)
-      )
-      .subscribe(
-        {
-          next: (data: TodoInterface) => {
-            // subscribe to a signal to receive updates.
-            console.debug('Data fetching:', data);
-            // Update data item only
-            const index = this.todosSignal().items.findIndex((todo) => todo.id === data.id);
-            if (index !== -1) {
-              let items: TodoInterface[] = this.todosSignal().items;
-              items[index] = data;
-              this.todosSignal.set({ ...this.todosSignal(), items: items, loading: false });
-            }
-            // Or update all items
-            // this.queryTodos()
+    this.todoService
+      .updateItem(todo)
+      .pipe(retry(2))
+      .subscribe({
+        next: (data: TodoInterface) => {
+          // subscribe to a signal to receive updates.
+          console.debug('Data fetching:', data);
+          // Update data item only
+          const index = this.todosSignal().items.findIndex(
+            (todo) => todo.id === data.id,
+          );
+          if (index !== -1) {
+            let items: TodoInterface[] = this.todosSignal().items;
+            items[index] = data;
+            this.todosSignal.set({
+              ...this.todosSignal(),
+              items: items,
+              loading: false,
+            });
+          }
+          // Or update all items
+          // this.queryTodos()
 
-            console.debug('set todosSignal', this.todosSignal());
-            this.errorMessage = '';
-            this.todoForm.get('value').setErrors(null);
-            this.notificationService.openSnackBar('Data update success', 'green-snackbar');
-          },
-          error: (error) => {
-            this.todosSignal.set({ ...this.todosSignal(), loading: false });
-            this.errorMessage = this.todoService.handleError(error);
-            this.notificationService.openSnackBar(`Error: ${this.errorMessage}`, 'red-snackbar');
-            this.todoForm.get('value').setErrors({ serverError: true });
-            console.error('Error fetching :', error);
-            return of(null);
-          },
-          complete: () => console.debug('Request complete')
-        });
+          console.debug('set todosSignal', this.todosSignal());
+          this.errorMessage = '';
+          this.todoForm.get('value').setErrors(null);
+          this.notificationService.openSnackBar(
+            'Data update success',
+            'green-snackbar',
+          );
+        },
+        error: (error) => {
+          this.todosSignal.set({ ...this.todosSignal(), loading: false });
+          this.errorMessage = this.todoService.handleError(error);
+          this.notificationService.openSnackBar(
+            `Error: ${this.errorMessage}`,
+            'red-snackbar',
+          );
+          this.todoForm.get('value').setErrors({ serverError: true });
+          console.error('Error fetching :', error);
+          return of(null);
+        },
+        complete: () => console.debug('Request complete'),
+      });
   }
 
   deleteTodo(todo: TodoInterface) {
     this.todosSignal.set({ ...this.todosSignal(), loading: true });
-    this.todoService.deleteItem(todo)
+    this.todoService
+      .deleteItem(todo)
       .pipe(retry(2))
-      .subscribe(
-        {
-          next: (data: TodoInterface) => {
-            // subscribe to a signal to receive updates.
-            console.debug('Data fetching:', data);
-            // Update data item only
-            const index = this.todosSignal().items.findIndex((todo) => todo.id === data.id);
-            if (index !== -1) {
-              let items: TodoInterface[] = this.todosSignal().items;
-              items = items.filter((item) => item.id !== data.id)
-              this.todosSignal.set({ ...this.todosSignal(), items: items, loading: false });
-            }
-            // Or update all items
-            // this.queryTodos()
+      .subscribe({
+        next: (data: TodoInterface) => {
+          // subscribe to a signal to receive updates.
+          console.debug('Data fetching:', data);
+          // Update data item only
+          const index = this.todosSignal().items.findIndex(
+            (todo) => todo.id === data.id,
+          );
+          if (index !== -1) {
+            let items: TodoInterface[] = this.todosSignal().items;
+            items = items.filter((item) => item.id !== data.id);
+            this.todosSignal.set({
+              ...this.todosSignal(),
+              items: items,
+              loading: false,
+            });
+          }
+          // Or update all items
+          // this.queryTodos()
 
-            console.debug('set todosSignal', this.todosSignal());
-            this.errorMessage = '';
-            this.todoForm.get('value').setErrors(null);
-            this.notificationService.openSnackBar('Data delete success', 'green-snackbar');
-          },
-          error: (error) => {
-            this.todosSignal.set({ ...this.todosSignal(), loading: false });
-            this.errorMessage = this.todoService.handleError(error);
-            this.notificationService.openSnackBar(`Error: ${this.errorMessage}`, 'red-snackbar');
-            this.todoForm.get('value').setErrors({ serverError: true });
-            console.error('Error fetching :', error);
-            return of(null);
-          },
-          complete: () => console.debug('Request complete')
-        });
+          console.debug('set todosSignal', this.todosSignal());
+          this.errorMessage = '';
+          this.todoForm.get('value').setErrors(null);
+          this.notificationService.openSnackBar(
+            'Data delete success',
+            'green-snackbar',
+          );
+        },
+        error: (error) => {
+          this.todosSignal.set({ ...this.todosSignal(), loading: false });
+          this.errorMessage = this.todoService.handleError(error);
+          this.notificationService.openSnackBar(
+            `Error: ${this.errorMessage}`,
+            'red-snackbar',
+          );
+          this.todoForm.get('value').setErrors({ serverError: true });
+          console.error('Error fetching :', error);
+          return of(null);
+        },
+        complete: () => console.debug('Request complete'),
+      });
   }
 }

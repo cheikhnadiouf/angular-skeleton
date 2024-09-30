@@ -11,19 +11,19 @@ import { NotificationService } from '../../shared/services/notification.service'
 })
 export class NotFoundComponent implements OnInit, OnDestroy, AfterViewInit {
   env = environment;
-  title= "Not found page"
+  title = 'Not found page';
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private titleService: Title,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
   ) {}
-  
+
   ngOnInit(): void {
     //Called once, when the instance is created.
 
-    this.titleService.setTitle(`${ this.title }`);
+    this.titleService.setTitle(`${this.title}`);
 
     setTimeout(() => {
       this.notificationService.openSnackBar('Page not found !');

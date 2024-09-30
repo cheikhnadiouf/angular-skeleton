@@ -1,9 +1,12 @@
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpParams,
+} from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { catchError, lastValueFrom, Observable, retry, throwError } from 'rxjs';
 import { TodoInterface } from '../../models/todo.interface';
 import { environment } from '../../../../environments/environment';
-
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +17,7 @@ export class TodoStoreService {
   private url = `${this.env.apiURL}/todos`;
 
   getItems(): Observable<TodoInterface[]> {
-    return this.http.get<TodoInterface[]>(this.url);      
+    return this.http.get<TodoInterface[]>(this.url);
   }
 
   getItemsAsPromise() {

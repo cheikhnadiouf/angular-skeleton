@@ -12,22 +12,19 @@ describe('AppComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent]
-    })
-      .compileComponents();
+      imports: [AppComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
     // Service instancied by the TestBed
     // We can get resolve dependencies using the TestBed injector by using the get function.
-    media =  TestBed.inject(MediaMatcher);
-    spinnerService =  TestBed.inject(SpinnerService);
+    media = TestBed.inject(MediaMatcher);
+    spinnerService = TestBed.inject(SpinnerService);
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-
 });

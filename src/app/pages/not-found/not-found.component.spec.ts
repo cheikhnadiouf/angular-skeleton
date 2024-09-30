@@ -13,22 +13,19 @@ describe('NotFoundComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NotFoundComponent]
-    })
-      .compileComponents();
+      imports: [NotFoundComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(NotFoundComponent);
     component = fixture.componentInstance;
     // Service instancied by the TestBed
     // We can get resolve dependencies using the TestBed injector by using the get function.
     titleService = TestBed.inject(Title);
-    notificationService =  TestBed.inject(NotificationService);
+    notificationService = TestBed.inject(NotificationService);
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-
 });

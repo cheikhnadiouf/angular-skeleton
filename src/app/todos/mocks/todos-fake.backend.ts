@@ -13,13 +13,10 @@ import { v4 as uuidv4 } from 'uuid';
 
 import todosMock from './todos.json';
 
-
 // array in local storage for todos
 const todosKey = 'todos-mock';
 const todosJSON = localStorage.getItem(todosKey);
-let todos: any[] = todosJSON
-  ? JSON.parse(todosJSON)
-  : todosMock;
+let todos: any[] = todosJSON ? JSON.parse(todosJSON) : todosMock;
 
 @Injectable({
   providedIn: 'root',
@@ -44,7 +41,7 @@ export class TodosBackendLessInterceptor implements HttpInterceptor {
         case url.match(/\/todos\/\w+$/) && method === 'PATCH':
           return updateTodo();
         case url.match(/\/todos\/\w+$/) && method === 'PUT':
-            return updateTodo();
+          return updateTodo();
         case url.match(/\/todos\/\w+$/) && method === 'DELETE':
           return deleteTodo();
         default:
@@ -70,7 +67,7 @@ export class TodosBackendLessInterceptor implements HttpInterceptor {
     }
 
     function createTodo() {
-      const todo = typeof body === 'string'? JSON.parse(body) : body;
+      const todo = typeof body === 'string' ? JSON.parse(body) : body;
 
       // Check if already exist
       if (todos.find((x) => x.value === todo.value)) {
@@ -126,11 +123,9 @@ export class TodosBackendLessInterceptor implements HttpInterceptor {
 
     function error(message: any, statusCode: number = 500) {
       console.error(message);
-      return throwError(() => { return { status: statusCode, message: message } }).pipe(
-        materialize(),
-        delay(500),
-        dematerialize(),
-      ); // call materialize and dematerialize to ensure delay even if an error is thrown (https://github.com/Reactive-Extensions/RxJS/issues/648);
+      return throwError(() => {
+        return { status: statusCode, message: message };
+      }).pipe(materialize(), delay(500), dematerialize()); // call materialize and dematerialize to ensure delay even if an error is thrown (https://github.com/Reactive-Extensions/RxJS/issues/648);
     }
 
     function basicDetails(todo: any) {

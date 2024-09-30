@@ -5,10 +5,10 @@ import { withTodosSelectors } from './todo.selectors';
 
 export interface TodoState {
   items: TodoInterface[];
-  currentTodo: Partial<TodoInterface>,
-  error: boolean,
-  errorMessage: string,
-  success: boolean,
+  currentTodo: Partial<TodoInterface>;
+  error: boolean;
+  errorMessage: string;
+  success: boolean;
   loading: boolean;
 }
 
@@ -16,7 +16,7 @@ export const initialState: TodoState = {
   items: [],
   currentTodo: {
     value: '',
-    done: false
+    done: false,
   },
   error: false,
   errorMessage: '',

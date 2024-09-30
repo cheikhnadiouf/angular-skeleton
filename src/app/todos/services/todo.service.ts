@@ -1,4 +1,8 @@
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpParams,
+} from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { catchError, lastValueFrom, Observable, retry, throwError } from 'rxjs';
 import { TodoInterface } from '../models/todo.interface';
@@ -14,12 +18,11 @@ export class TodoService {
   private url = `${this.env.apiURL}/todos`;
 
   getItems(): Observable<TodoInterface[]> {
-    const params = new HttpParams()
+    const params = new HttpParams();
     //.set('orderBy', '"$key"')
     //.set('limitToFirst', "1");
     console.debug('trigger fetching');
     return this.http.get<TodoInterface[]>(this.url, { params });
-      
   }
 
   getItemsAsPromise(): Promise<TodoInterface[]> {
@@ -30,18 +33,17 @@ export class TodoService {
     return this.http.get<TodoInterface>(`${this.url}/${id}`);
   }
 
-  createItem(value: TodoInterface): Observable<TodoInterface>{
+  createItem(value: TodoInterface): Observable<TodoInterface> {
     return this.http.post<TodoInterface>(this.url, value);
   }
 
-  updateItem(value: TodoInterface): Observable<TodoInterface>{
+  updateItem(value: TodoInterface): Observable<TodoInterface> {
     return this.http.put<TodoInterface>(`${this.url}/${value.id}`, value);
   }
 
-  deleteItem(value: TodoInterface): Observable<TodoInterface>{
+  deleteItem(value: TodoInterface): Observable<TodoInterface> {
     return this.http.delete<TodoInterface>(`${this.url}/${value.id}`);
   }
-
 
   handleError(err: HttpErrorResponse): string {
     // in a real world app, we may send the server to some remote logging infrastructure
@@ -53,8 +55,9 @@ export class TodoService {
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
-      errorMessage = `Server returned code: ${err.status}, error message is: ${err.message
-        }`;
+      errorMessage = `Server returned code: ${err.status}, error message is: ${
+        err.message
+      }`;
     }
     console.error(errorMessage);
     // return throwError(() => errorMessage);

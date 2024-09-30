@@ -1,6 +1,11 @@
 import { inject } from '@angular/core';
 import { tapResponse } from '@ngrx/operators';
-import { patchState, signalStoreFeature, type, withMethods } from '@ngrx/signals';
+import {
+  patchState,
+  signalStoreFeature,
+  type,
+  withMethods,
+} from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { switchMap } from 'rxjs';
 
@@ -18,9 +23,19 @@ export function withTodosMethods() {
 
           return todoStoreService.getItems().pipe(
             tapResponse({
-              next: (allItems) => patchState(store, { items: allItems, success: true, error: false, errorMessage: '' }),
+              next: (allItems) =>
+                patchState(store, {
+                  items: allItems,
+                  success: true,
+                  error: false,
+                  errorMessage: '',
+                }),
               error: (e: Error) => {
-                patchState(store, { error: true, errorMessage: e.message, success: false })
+                patchState(store, {
+                  error: true,
+                  errorMessage: e.message,
+                  success: false,
+                });
               },
               finalize: () => patchState(store, { loading: false }),
             }),
@@ -41,9 +56,18 @@ export function withTodosMethods() {
           return todoStoreService.createItem(value).pipe(
             tapResponse({
               next: (item) =>
-                patchState(store, { items: [...store.items(), item], success: true, error: false, errorMessage: '' }),
+                patchState(store, {
+                  items: [...store.items(), item],
+                  success: true,
+                  error: false,
+                  errorMessage: '',
+                }),
               error: (e: Error) => {
-                patchState(store, { error: true, errorMessage: e.message, success: false })
+                patchState(store, {
+                  error: true,
+                  errorMessage: e.message,
+                  success: false,
+                });
               },
               finalize: () => patchState(store, { loading: false }),
             }),
@@ -66,11 +90,17 @@ export function withTodosMethods() {
 
                 patchState(store, {
                   items: allItems,
-                  success: true, error: false, errorMessage: ''
+                  success: true,
+                  error: false,
+                  errorMessage: '',
                 });
               },
               error: (e: Error) => {
-                patchState(store, { error: true, errorMessage: e.message, success: false })
+                patchState(store, {
+                  error: true,
+                  errorMessage: e.message,
+                  success: false,
+                });
               },
               finalize: () => patchState(store, { loading: false }),
             }),
@@ -87,11 +117,17 @@ export function withTodosMethods() {
               next: () => {
                 patchState(store, {
                   items: [...store.items().filter((x) => x.id !== todo.id)],
-                  success: true, error: false, errorMessage: ''
+                  success: true,
+                  error: false,
+                  errorMessage: '',
                 });
               },
               error: (e: Error) => {
-                patchState(store, { error: true, errorMessage: e.message, success: false })
+                patchState(store, {
+                  error: true,
+                  errorMessage: e.message,
+                  success: false,
+                });
               },
               finalize: () => patchState(store, { loading: false }),
             }),

@@ -22,9 +22,9 @@ export function withTodosSelectors() {
       }),
       lastTodo: computed(() => {
         const total = items().length;
-        const lastItem = (total > 0) ? items()[total - 1] : { value: '' };
+        const lastItem = total > 0 ? items()[total - 1] : { value: '' };
         return lastItem;
       }),
-    }))
+    })),
   );
 }

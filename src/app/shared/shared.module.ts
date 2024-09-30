@@ -34,7 +34,6 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 import { SpinnerService } from './services/spinner.service';
 
-
 export const MY_FORMATS = {
   parse: {
     dateInput: 'DD MMM YYYY',
@@ -43,37 +42,75 @@ export const MY_FORMATS = {
     dateInput: 'DD MMM YYYY',
     monthYearLabel: 'MMM YYYY',
     dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM YYYY'
-  }
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
 };
-
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MatSidenavModule, MatIconModule, MatToolbarModule, MatButtonModule,
-    MatListModule, MatCardModule, MatProgressBarModule, MatInputModule,
-    MatSnackBarModule, MatProgressSpinnerModule, MatDatepickerModule,
-    MatAutocompleteModule, MatTableModule, MatDialogModule, MatTabsModule,
-    MatTooltipModule, MatSelectModule, MatPaginatorModule, MatChipsModule,
-    MatButtonToggleModule, MatSlideToggleModule, MatBadgeModule, MatCheckboxModule,
-    MatExpansionModule, DragDropModule, MatSortModule
+    MatSidenavModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatListModule,
+    MatCardModule,
+    MatProgressBarModule,
+    MatInputModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatAutocompleteModule,
+    MatTableModule,
+    MatDialogModule,
+    MatTabsModule,
+    MatTooltipModule,
+    MatSelectModule,
+    MatPaginatorModule,
+    MatChipsModule,
+    MatButtonToggleModule,
+    MatSlideToggleModule,
+    MatBadgeModule,
+    MatCheckboxModule,
+    MatExpansionModule,
+    DragDropModule,
+    MatSortModule,
   ],
   exports: [
     CommonModule,
     ReactiveFormsModule,
-    MatSidenavModule, MatIconModule, MatToolbarModule, MatButtonModule,
-    MatListModule, MatCardModule, MatProgressBarModule, MatInputModule,
-    MatSnackBarModule, MatMenuModule, MatProgressSpinnerModule, MatDatepickerModule,
-    MatAutocompleteModule, MatTableModule, MatDialogModule, MatTabsModule,
-    MatTooltipModule, MatSelectModule, MatPaginatorModule, MatChipsModule,
-    MatButtonToggleModule, MatSlideToggleModule, MatBadgeModule, MatCheckboxModule,
-    MatExpansionModule, DragDropModule, MatSortModule
+    MatSidenavModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatListModule,
+    MatCardModule,
+    MatProgressBarModule,
+    MatInputModule,
+    MatSnackBarModule,
+    MatMenuModule,
+    MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatAutocompleteModule,
+    MatTableModule,
+    MatDialogModule,
+    MatTabsModule,
+    MatTooltipModule,
+    MatSelectModule,
+    MatPaginatorModule,
+    MatChipsModule,
+    MatButtonToggleModule,
+    MatSlideToggleModule,
+    MatBadgeModule,
+    MatCheckboxModule,
+    MatExpansionModule,
+    DragDropModule,
+    MatSortModule,
   ],
 })
-export class SharedModule { 
+export class SharedModule {
   static forRoot(): ModuleWithProviders<any> {
     // Share unique instance of a service beetween modules
     return {
@@ -82,12 +119,15 @@ export class SharedModule {
         // Custom
         MediaMatcher,
         SpinnerService,
-        {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},
+        {
+          provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+          useValue: { appearance: 'outline' },
+        },
         {
           provide: MAT_DATE_FORMATS,
-          useValue: MY_FORMATS
+          useValue: MY_FORMATS,
         },
-        { provide: LOCALE_ID, useValue: 'en-gb' }
+        { provide: LOCALE_ID, useValue: 'en-gb' },
       ],
     };
   }

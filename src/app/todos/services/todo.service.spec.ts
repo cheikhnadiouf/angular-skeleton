@@ -4,18 +4,15 @@ import { Title } from '@angular/platform-browser';
 
 import { TodoService } from './todo.service';
 
-
 describe('TodoComponent', () => {
   let todoService: TodoService;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({})
-      .compileComponents();
+    await TestBed.configureTestingModule({}).compileComponents();
     todoService = TestBed.inject(TodoService);
   });
 
   it('should create', () => {
     expect(todoService).toBeTruthy();
   });
-
 });
