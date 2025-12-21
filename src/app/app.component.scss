@@ -43,7 +43,7 @@
   /*Set sidenav width*/
   
   mat-sidenav {
-    min-width: 180px !important;
+    min-width: 240px !important;
     border-right: 1px solid #eee;
     box-shadow: 6px 0 6px rgba(0, 0, 0, .1);
     /* background-color:rgb(63, 81, 181); */
@@ -62,4 +62,13 @@
   #push-bottom {
     position: absolute;
     bottom: 0;
+  }
+
+  .mat-list-item {
+    display: flex;
+    align-items: center;
+  }
+
+  mat-nav-list .mat-list-item mat-icon[mat-list-icon] {
+    margin-right: 24px !important;
   }

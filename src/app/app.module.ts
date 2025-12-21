@@ -1,12 +1,14 @@
-import { NgModule, isDevMode } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { provideStoreDevtools } from '@ngrx/store-devtools';
 import {
   HTTP_INTERCEPTORS,
+  HttpClient,
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { I18nService } from './shared/services/i18n.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,7 +20,6 @@ import { environment } from '../environments/environment';
 const commonProviders = [
   provideAnimationsAsync(),
   provideHttpClient(),
-  provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
 ];
 
 const nonProductionProviders = [
@@ -35,6 +36,7 @@ const nonProductionProviders = [
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    TranslateModule.forRoot(),
     SharedModule.forRoot(), // Share components and unique instance of a service beetween modules
     // PagesModule,
     AppRoutingModule, // MUST COME LAST AFTER ROUTED MODULES RESOURCES:

@@ -1,0 +1,47 @@
+{
+  "COMMON": {
+    "HOME": "ホーム",
+    "NGRX": "NGRX",
+    "NOT_FOUND": "見つかりません",
+    "SETTINGS": "設定",
+    "LANGUAGE": "言語",
+    "SAVE": "保存",
+    "CANCEL": "キャンセル",
+    "LOADING": "読み込み中...",
+    "ERROR": "エラー",
+    "SUCCESS": "成功"
+  },
+  "HOME": {
+    "TITLE": "Angular Skeletonへようこそ",
+    "DESCRIPTION": "これはMaterial Design、シグナル、NGRX状態管理を備えたモダンなAngular 18+アプリケーションです。",
+    "GET_STARTED": "始める"
+  },
+  "TODOS": {
+    "TITLE": "タスクリスト",
+    "ADD_TODO": "タスクを追加",
+    "EDIT_TODO": "タスクを編集",
+    "DELETE_TODO": "タスクを削除",
+    "MARK_DONE": "完了としてマーク",
+    "MARK_UNDONE": "未完了としてマーク",
+    "NO_TODOS": "利用可能なタスクがありません",
+    "PLACEHOLDER": "タスクテキストを入力..."
+  },
+  "SETTINGS": {
+    "TITLE": "設定",
+    "LANGUAGE_SELECTION": "言語選択",
+    "SELECT_LANGUAGE": "お好みの言語を選択してください",
+    "APPLY_CHANGES": "変更を適用"
+  },
+  "LANGUAGES": {
+    "en": "English",
+    "fr": "Français",
+    "es": "Español", 
+    "it": "Italiano",
+    "de": "Deutsch",
+    "pt": "Português",
+    "ar": "العربية",
+    "zh": "中文",
+    "ja": "日本語",
+    "ko": "한국어"
+  }
+}

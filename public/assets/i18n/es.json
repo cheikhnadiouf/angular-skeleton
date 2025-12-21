@@ -1,0 +1,49 @@
+{
+  "COMMON": {
+    "HOME": "Inicio",
+    "NGRX": "NGRX",
+    "NOT_FOUND": "No encontrado",
+    "SETTINGS": "Configuración",
+    "LANGUAGE": "Idioma",
+    "SAVE": "Guardar",
+    "CANCEL": "Cancelar",
+    "LOADING": "Cargando...",
+    "ERROR": "Error",
+    "SUCCESS": "Éxito",
+    "MENU": "Menú",
+    "NAVIGATION": "Navegación"
+  },
+  "HOME": {
+    "TITLE": "Bienvenido a Angular Skeleton",
+    "DESCRIPTION": "Esta es una aplicación Angular 18+ moderna con Material Design, señales y gestión de estado NGRX.",
+    "GET_STARTED": "Comenzar"
+  },
+  "TODOS": {
+    "TITLE": "Lista de tareas",
+    "ADD_TODO": "Agregar tarea",
+    "EDIT_TODO": "Editar tarea",
+    "DELETE_TODO": "Eliminar tarea",
+    "MARK_DONE": "Marcar como completado",
+    "MARK_UNDONE": "Marcar como pendiente",
+    "NO_TODOS": "No hay tareas disponibles",
+    "PLACEHOLDER": "Ingrese el texto de la tarea..."
+  },
+  "SETTINGS": {
+    "TITLE": "Configuración",
+    "LANGUAGE_SELECTION": "Selección de idioma",
+    "SELECT_LANGUAGE": "Seleccione su idioma preferido",
+    "APPLY_CHANGES": "Aplicar cambios"
+  },
+  "LANGUAGES": {
+    "en": "English",
+    "fr": "Français",
+    "es": "Español", 
+    "it": "Italiano",
+    "de": "Deutsch",
+    "pt": "Português",
+    "ar": "العربية",
+    "zh": "中文",
+    "ja": "日本語",
+    "ko": "한국어"
+  }
+}

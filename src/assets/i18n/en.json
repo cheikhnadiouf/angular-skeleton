@@ -1,0 +1,49 @@
+{
+  "COMMON": {
+    "HOME": "Home",
+    "NGRX": "NGRX",
+    "NOT_FOUND": "Not Found",
+    "SETTINGS": "Settings",
+    "LANGUAGE": "Language",
+    "SAVE": "Save",
+    "CANCEL": "Cancel",
+    "LOADING": "Loading...",
+    "ERROR": "Error",
+    "SUCCESS": "Success",
+    "MENU": "Menu",
+    "NAVIGATION": "Navigation"
+  },
+  "HOME": {
+    "TITLE": "Welcome to Angular Skeleton",
+    "DESCRIPTION": "This is a modern Angular 18+ application with Material Design, signals, and NGRX state management.",
+    "GET_STARTED": "Get Started"
+  },
+  "TODOS": {
+    "TITLE": "Todo List",
+    "ADD_TODO": "Add Todo",
+    "EDIT_TODO": "Edit Todo",
+    "DELETE_TODO": "Delete Todo",
+    "MARK_DONE": "Mark as Done",
+    "MARK_UNDONE": "Mark as Undone",
+    "NO_TODOS": "No todos available",
+    "PLACEHOLDER": "Enter todo text..."
+  },
+  "SETTINGS": {
+    "TITLE": "Settings",
+    "LANGUAGE_SELECTION": "Language Selection",
+    "SELECT_LANGUAGE": "Select your preferred language",
+    "APPLY_CHANGES": "Apply Changes"
+  },
+  "LANGUAGES": {
+    "en": "English",
+    "fr": "Français",
+    "es": "Español", 
+    "it": "Italiano",
+    "de": "Deutsch",
+    "pt": "Português",
+    "ar": "العربية",
+    "zh": "中文",
+    "ja": "日本語",
+    "ko": "한국어"
+  }
+}

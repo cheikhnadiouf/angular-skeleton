@@ -19,7 +19,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
 import { NotificationService } from '../../../shared/services/notification.service';
-import { TodoStore } from '../../store/todo.state';
 import { catchError, delay, filter, of, retry } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { TodoInterface } from '../../models/todo.interface';
@@ -27,9 +26,10 @@ import { initialState, TodoState } from '../../models/todo.state';
 import { TodoService } from '../../services/todo.service';
 
 @Component({
-  selector: 'app-todo',
-  templateUrl: './todo.component.html',
-  styleUrl: './todo.component.css',
+    selector: 'app-todo',
+    templateUrl: './todo.component.html',
+    styleUrl: './todo.component.css',
+    standalone: false
 })
 export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
   env = environment;
@@ -83,20 +83,14 @@ export class TodoComponent implements OnInit, OnDestroy, AfterViewInit {
       done: new FormControl<boolean>(this.todosSignal().currentItem.done, []),
     });
 
-    effect(
-      () => {
-        // 👇 The effect will be re-executed whenever the state changes.
-
-        const itemsLength: number = this.todosSignal().items.length;
-        console.debug('Todo state changed', this.todosSignal());
-        if (itemsLength == 0) {
-          this.notificationService.openSnackBar(`Empty data`, 'red-snackbar');
-        }
-      },
-      // Writing to signals is not allowed in a `computed` or an `effect` by default.
-      // Using `allowSignalWrites` in the `CreateEffectOptions` to enable this inside effects from input form binding with signals
-      { allowSignalWrites: true },
-    );
+    effect(() => {
+      // 👇 The effect will be re-executed whenever the state changes.
+      const itemsLength: number = this.todosSignal().items.length;
+      console.debug('Todo state changed', this.todosSignal());
+      if (itemsLength == 0) {
+        this.notificationService.openSnackBar(`Empty data`, 'red-snackbar');
+      }
+    });
   }
 
   ngOnInit(): void {

@@ -1,0 +1,27 @@
+{
+  "entryPointStrategy": "expand",
+  "entryPoints": ["src/app"],
+  "out": "docs/api",
+  "tsconfig": "tsconfig.json",
+  "exclude": [
+    "**/*.spec.ts",
+    "**/*.e2e-spec.ts",
+    "**/e2e/**",
+    "**/mocks/**"
+  ],
+  "theme": "default",
+  "readme": "none",
+  "hideGenerator": true,
+  "excludePrivate": true,
+  "excludeProtected": false,
+  "excludeInternal": true,
+  "categorizeByGroup": true,
+  "defaultCategory": "Other",
+  "categoryOrder": [
+    "Components",
+    "Services", 
+    "Models",
+    "Modules",
+    "*"
+  ]
+}

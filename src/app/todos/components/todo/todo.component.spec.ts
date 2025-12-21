@@ -1,9 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { expect } from '@jest/globals';
 import { Title } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { TodoComponent } from './todo.component';
 import { NotificationService } from '../../../shared/services/notification.service';
+import { TodoService } from '../../services/todo.service';
 
 describe('TodoComponent', () => {
   let component: TodoComponent;
@@ -12,7 +17,18 @@ describe('TodoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TodoComponent],
+      declarations: [TodoComponent],
+      imports: [
+        HttpClientTestingModule,
+        NoopAnimationsModule,
+        ReactiveFormsModule
+      ],
+      providers: [
+        Title,
+        NotificationService,
+        TodoService
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
 
     fixture = TestBed.createComponent(TodoComponent);

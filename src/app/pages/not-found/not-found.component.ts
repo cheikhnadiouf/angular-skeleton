@@ -5,9 +5,10 @@ import { Title } from '@angular/platform-browser';
 import { NotificationService } from '../../shared/services/notification.service';
 
 @Component({
-  selector: 'app-notfound',
-  templateUrl: './not-found.component.html',
-  styleUrls: ['./not-found.component.scss'],
+    selector: 'app-notfound',
+    templateUrl: './not-found.component.html',
+    styleUrls: ['./not-found.component.scss'],
+    standalone: false
 })
 export class NotFoundComponent implements OnInit, OnDestroy, AfterViewInit {
   env = environment;

@@ -7,6 +7,10 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/pages.module').then((m) => m.PagesModule),
   },
+  {
+    path: '**',
+    redirectTo: '/pages/notfound'
+  }
 ];
 
 @NgModule({

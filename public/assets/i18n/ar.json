@@ -1,0 +1,49 @@
+{
+  "COMMON": {
+    "HOME": "الرئيسية",
+    "NGRX": "NGRX",
+    "NOT_FOUND": "غير موجود",
+    "SETTINGS": "الإعدادات",
+    "LANGUAGE": "اللغة",
+    "SAVE": "حفظ",
+    "CANCEL": "إلغاء",
+    "LOADING": "جاري التحميل...",
+    "ERROR": "خطأ",
+    "SUCCESS": "نجح",
+    "MENU": "القائمة",
+    "NAVIGATION": "التنقل"
+  },
+  "HOME": {
+    "TITLE": "مرحباً بك في Angular Skeleton",
+    "DESCRIPTION": "هذا تطبيق Angular 18+ حديث مع Material Design والإشارات وإدارة الحالة NGRX.",
+    "GET_STARTED": "ابدأ"
+  },
+  "TODOS": {
+    "TITLE": "قائمة المهام",
+    "ADD_TODO": "إضافة مهمة",
+    "EDIT_TODO": "تعديل المهمة",
+    "DELETE_TODO": "حذف المهمة",
+    "MARK_DONE": "تحديد كمكتمل",
+    "MARK_UNDONE": "تحديد كغير مكتمل",
+    "NO_TODOS": "لا توجد مهام متاحة",
+    "PLACEHOLDER": "أدخل نص المهمة..."
+  },
+  "SETTINGS": {
+    "TITLE": "الإعدادات",
+    "LANGUAGE_SELECTION": "اختيار اللغة",
+    "SELECT_LANGUAGE": "اختر لغتك المفضلة",
+    "APPLY_CHANGES": "تطبيق التغييرات"
+  },
+  "LANGUAGES": {
+    "en": "English",
+    "fr": "Français",
+    "es": "Español", 
+    "it": "Italiano",
+    "de": "Deutsch",
+    "pt": "Português",
+    "ar": "العربية",
+    "zh": "中文",
+    "ja": "日本語",
+    "ko": "한국어"
+  }
+}

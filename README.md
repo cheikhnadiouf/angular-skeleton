@@ -1,7 +1,7 @@
-# Angular 18+ Skeleton
+# Angular 19+ Skeleton
 ===
-Angular 18+ starter kit to develop a Single Page Application(SPA) using Angular material, State management with signals, enhanced reactive forms, NGRX Signals (optional), Jest and Cypress.
-- version alpha 0.1
+Angular 19+ starter kit to develop a Single Page Application(SPA) using Angular material, State management with signals, enhanced reactive forms, internationalization, Jest and Cypress.
+- version alpha 0.2
 
 > **Alert note:**  This application is for demonstration purpose only and it is not intended for use in a specific production. It is too generic and not designed to be particularly efficient, stable, or secure. It does not support all the required features and specific needs of a complete production-ready solution !
 
@@ -23,6 +23,7 @@ Angular 18+ starter kit to develop a Single Page Application(SPA) using Angular 
   - [Running code quality](#running-code-quality)
   - [Running code performance](#running-code-performance)
   - [Running code security](#running-code-security)
+  - [Generate documentation](#generate-documentation)
   - [Optional: Generate mermaid diagrams](#optional-generate-mermaid-diagrams)
 
 # Overview
@@ -31,17 +32,19 @@ Angular 18+ starter kit to develop a Single Page Application(SPA) using Angular 
 
 ![preview-demo.gif](preview-demo.gif)
 
-**5 main Features:**
+**6 main Features:**
 
-1- **Angular skeleton:** Project template starter using Angular framework and development toolkit.
+1- **Angular skeleton:** Project template starter using Angular 19 framework and development toolkit.
 
-2- **UX/UI design :** Theme, fonts, icons, Layout, responsive page and UI components using Angular material, icons, roboto font and CDK (Angular Material Component Development Kit).
+2- **UX/UI design:** Theme, fonts, icons, Layout, responsive page and UI components using Angular material, icons, roboto font and CDK (Angular Material Component Development Kit).
 
-3- **Unit, integration and e2e Tests:** Unit test code samples using Jest and  e2e test code samples using Cypress.
+3- **Internationalization:** Multi-language support with 10 languages (EN, FR, ES, IT, DE, PT, AR, ZH, JA, KO) including RTL support and international fonts.
 
-4- **Technical documentation:** Docs, guidelines using Markdown and diagrams using Mermaid.
+4- **Unit, integration and e2e Tests:** Comprehensive test suite using Jest for unit tests and Cypress for end-to-end testing with full coverage.
 
-5- **Reactive state management:** a reactive solution usign Rxjs, signals and optional @ngrx/signals (NGRX store with Angular Signals).
+5- **Technical documentation:** Docs, guidelines using Markdown and diagrams using Mermaid with TypeDoc API documentation.
+
+6- **Reactive state management:** a reactive solution using RxJS and Angular signals for modern state management.
 
 ---
 
@@ -162,7 +165,27 @@ Run `npm run test` to execute the unit tests via [Jest.js](https://jestjs.io/).
 
 ## Running end-to-end tests
 
-Run `npm run e2e` to execute the end-to-end tests via [Cypress](https://www.cypress.io/).
+Run `npm run e2e` to execute the comprehensive end-to-end test suite via [Cypress](https://www.cypress.io/).
+
+```bash
+# Install Cypress (if needed)
+npx cypress install
+
+# Run all e2e tests (automatically starts dev server)
+npm run e2e
+
+# Or run manually:
+npx cypress run
+npx cypress open
+```
+
+**E2E Test Coverage:**
+- Home page functionality and navigation
+- Settings and language switching
+- Todo management (CRUD operations)
+- Responsive design across devices
+- Accessibility compliance
+- Cross-browser compatibility
 
 ## Further help
 
@@ -191,7 +214,18 @@ Run `npm run code-perf` to execute an audit performance of the code via [Lightho
 
 Run `npm run code:security` to execute a security scan of the code via [Npm audit](https://docs.npmjs.com/cli/v10/commands/npm-audit)
 
+### Generate documentation
+
+Run `npm run docs:build` to generate complete application documentation including:
+- TypeScript API documentation via [TypeDoc](https://typedoc.org/)
+- Architecture diagrams via [Mermaid CLI](https://github.com/mermaid-js/mermaid-cli)
+- Interactive documentation portal
+
+Run `npm run docs:serve` to serve documentation locally at http://localhost:8080
+
+📚 **[View Complete Documentation](./docs/index.html)**
+
 ### Optional: Generate mermaid diagrams
 
 Install globally `npm install -g @mermaid-js/mermaid-cli`
-Run `npm run diagram-file` to generate diagrams file for markdown file via [Mermaid cli](https://github.com/mermaid-js/mermaid-cli)
+Run `npm run diagram-files` to generate diagrams file for markdown file via [Mermaid cli](https://github.com/mermaid-js/mermaid-cli)

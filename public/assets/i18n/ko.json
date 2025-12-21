@@ -1,0 +1,47 @@
+{
+  "COMMON": {
+    "HOME": "홈",
+    "NGRX": "NGRX",
+    "NOT_FOUND": "찾을 수 없음",
+    "SETTINGS": "설정",
+    "LANGUAGE": "언어",
+    "SAVE": "저장",
+    "CANCEL": "취소",
+    "LOADING": "로딩 중...",
+    "ERROR": "오류",
+    "SUCCESS": "성공"
+  },
+  "HOME": {
+    "TITLE": "Angular Skeleton에 오신 것을 환영합니다",
+    "DESCRIPTION": "이것은 Material Design, 시그널, NGRX 상태 관리를 갖춘 현대적인 Angular 18+ 애플리케이션입니다.",
+    "GET_STARTED": "시작하기"
+  },
+  "TODOS": {
+    "TITLE": "할 일 목록",
+    "ADD_TODO": "할 일 추가",
+    "EDIT_TODO": "할 일 편집",
+    "DELETE_TODO": "할 일 삭제",
+    "MARK_DONE": "완료로 표시",
+    "MARK_UNDONE": "미완료로 표시",
+    "NO_TODOS": "사용 가능한 할 일이 없습니다",
+    "PLACEHOLDER": "할 일 텍스트 입력..."
+  },
+  "SETTINGS": {
+    "TITLE": "설정",
+    "LANGUAGE_SELECTION": "언어 선택",
+    "SELECT_LANGUAGE": "선호하는 언어를 선택하세요",
+    "APPLY_CHANGES": "변경사항 적용"
+  },
+  "LANGUAGES": {
+    "en": "English",
+    "fr": "Français",
+    "es": "Español", 
+    "it": "Italiano",
+    "de": "Deutsch",
+    "pt": "Português",
+    "ar": "العربية",
+    "zh": "中文",
+    "ja": "日本語",
+    "ko": "한국어"
+  }
+}

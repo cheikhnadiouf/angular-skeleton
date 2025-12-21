@@ -23,7 +23,7 @@
         <span>You have a new message</span>
       </a>
     </mat-menu>
-    <button mat-button [matMenuTriggerFor]="userMenu">
+    <button mat-button [matMenuTriggerFor]="userMenu" data-cy="user-menu">
       <mat-icon>person</mat-icon>
       <span fxShow fxHide.xs>
         Profile
@@ -34,10 +34,23 @@
         <mat-icon>person</mat-icon>
         <span>Account</span>
       </a>
+      <a mat-menu-item [routerLink]="['/pages/settings']">
+        <mat-icon>settings</mat-icon>
+        <span>{{ 'COMMON.SETTINGS' | translate }}</span>
+      </a>
       <a mat-menu-item [routerLink]="['/auth/login']">
         <mat-icon>exit_to_app</mat-icon>
         <span>Log out</span>
       </a>
+    </mat-menu>
+    <button mat-button [matMenuTriggerFor]="languageMenu" data-cy="language-menu">
+      <span>{{ i18nService.getCurrentLanguage()?.flag || '🇺🇸' }}</span>
+      <mat-icon>expand_more</mat-icon>
+    </button>
+    <mat-menu #languageMenu="matMenu" xPosition="before" yPosition="above" [overlapTrigger]="false">
+      <button mat-menu-item *ngFor="let lang of i18nService.supportedLanguages" (click)="i18nService.setLanguage(lang.code)">
+        <span>{{ lang.flag }} {{ lang.name }}</span>
+      </button>
     </mat-menu>
   </mat-toolbar>
 
@@ -46,15 +59,18 @@
     <mat-sidenav #snav [opened]="!mobileQuery.matches" [mode]="mobileQuery.matches ? 'over' : 'side'"
       [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" class="sidenav">
       <mat-nav-list>
-        <h3 class="text-center" mat-subheader>Menu</h3>
+        <h3 class="text-center" mat-subheader>{{ 'COMMON.MENU' | translate }}</h3>
         <mat-divider></mat-divider>
-        <h3 mat-subheader>Section </h3>
+        <h3 mat-subheader>{{ 'COMMON.NAVIGATION' | translate }}</h3>
         <a mat-list-item [routerLink]="['/pages/home']" routerLinkActive="active">
-          <p mat-line> Default page</p>
+          <mat-icon mat-list-icon style="margin-right: 24px;">home</mat-icon>
+          <span>{{ 'COMMON.HOME' | translate }}</span>
         </a>
+
         <mat-divider></mat-divider>
-        <a mat-list-item [routerLink]="['/pages/ngrx']" routerLinkActive="active">
-          <p mat-line> Ngrx page</p>
+        <a mat-list-item [routerLink]="['/pages/settings']" routerLinkActive="active">
+          <mat-icon mat-list-icon style="margin-right: 24px;">settings</mat-icon>
+          <span>{{ 'COMMON.SETTINGS' | translate }}</span>
         </a>
         <mat-divider></mat-divider>
         <a mat-list-item [routerLink]="['/pages/notfound']">

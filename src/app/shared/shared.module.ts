@@ -1,6 +1,8 @@
 import { NgModule, ModuleWithProviders, LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { MediaMatcher } from '@angular/cdk/layout';
+import { TranslateModule } from '@ngx-translate/core';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -33,6 +35,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 import { SpinnerService } from './services/spinner.service';
+import { I18nService } from './services/i18n.service';
+import { SettingsComponent } from './components/settings/settings.component';
 
 export const MY_FORMATS = {
   parse: {
@@ -47,7 +51,7 @@ export const MY_FORMATS = {
 };
 
 @NgModule({
-  declarations: [],
+  declarations: [SettingsComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -77,6 +81,7 @@ export const MY_FORMATS = {
     MatExpansionModule,
     DragDropModule,
     MatSortModule,
+    TranslateModule.forChild()
   ],
   exports: [
     CommonModule,
@@ -108,6 +113,8 @@ export const MY_FORMATS = {
     MatExpansionModule,
     DragDropModule,
     MatSortModule,
+    TranslateModule,
+    SettingsComponent
   ],
 })
 export class SharedModule {
@@ -119,6 +126,7 @@ export class SharedModule {
         // Custom
         MediaMatcher,
         SpinnerService,
+        I18nService,
         {
           provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
           useValue: { appearance: 'outline' },

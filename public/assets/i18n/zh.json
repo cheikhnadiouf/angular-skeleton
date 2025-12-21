@@ -1,0 +1,49 @@
+{
+  "COMMON": {
+    "HOME": "首页",
+    "NGRX": "NGRX",
+    "NOT_FOUND": "未找到",
+    "SETTINGS": "设置",
+    "LANGUAGE": "语言",
+    "SAVE": "保存",
+    "CANCEL": "取消",
+    "LOADING": "加载中...",
+    "ERROR": "错误",
+    "SUCCESS": "成功",
+    "MENU": "菜单",
+    "NAVIGATION": "导航"
+  },
+  "HOME": {
+    "TITLE": "欢迎使用 Angular Skeleton",
+    "DESCRIPTION": "这是一个现代的 Angular 18+ 应用程序，具有 Material Design、信号和 NGRX 状态管理。",
+    "GET_STARTED": "开始使用"
+  },
+  "TODOS": {
+    "TITLE": "待办事项列表",
+    "ADD_TODO": "添加待办事项",
+    "EDIT_TODO": "编辑待办事项",
+    "DELETE_TODO": "删除待办事项",
+    "MARK_DONE": "标记为已完成",
+    "MARK_UNDONE": "标记为未完成",
+    "NO_TODOS": "没有可用的待办事项",
+    "PLACEHOLDER": "输入待办事项文本..."
+  },
+  "SETTINGS": {
+    "TITLE": "设置",
+    "LANGUAGE_SELECTION": "语言选择",
+    "SELECT_LANGUAGE": "选择您的首选语言",
+    "APPLY_CHANGES": "应用更改"
+  },
+  "LANGUAGES": {
+    "en": "English",
+    "fr": "Français",
+    "es": "Español", 
+    "it": "Italiano",
+    "de": "Deutsch",
+    "pt": "Português",
+    "ar": "العربية",
+    "zh": "中文",
+    "ja": "日本語",
+    "ko": "한국어"
+  }
+}

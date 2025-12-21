@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>app-architecture</title>
+    <style>
+        body { font-family: 'Roboto', sans-serif; line-height: 1.6; max-width: 1200px; margin: 0 auto; padding: 20px; }
+        h1, h2, h3 { color: #1976d2; }
+        pre { background: #f5f5f5; padding: 15px; border-radius: 5px; overflow-x: auto; }
+        code { background: #f5f5f5; padding: 2px 4px; border-radius: 3px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .mermaid { text-align: center; margin: 20px 0; }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({startOnLoad:true, theme: 'default'});
+        document.addEventListener('DOMContentLoaded', function() {
+            const codeBlocks = document.querySelectorAll('pre code.language-mermaid');
+            codeBlocks.forEach((block, index) => {
+                const mermaidDiv = document.createElement('div');
+                mermaidDiv.className = 'mermaid';
+                mermaidDiv.textContent = block.textContent;
+                block.parentElement.replaceWith(mermaidDiv);
+            });
+        });
+    </script>
+</head>
+<body><h1>Application Architecture Diagrams</h1>
+<h2>Module Dependencies</h2>
+<p><img src="./app-architecture-1.svg" alt="diagram"></p>
+<h2>State Management Flow</h2>
+<p><img src="./app-architecture-2.svg" alt="diagram"></p>
+<h2>Component Architecture</h2>
+<p><img src="./app-architecture-3.svg" alt="diagram"></p>
+<h2>Data Flow</h2>
+<p><img src="./app-architecture-4.svg" alt="diagram"></p>
+<h2>Entity Relationships</h2>
+<p><img src="./app-architecture-5.svg" alt="diagram"></p>
+<h2>Class Diagram</h2>
+<p><img src="./app-architecture-6.svg" alt="diagram"></p>
+</body>
+</html>

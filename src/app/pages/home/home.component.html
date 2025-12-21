@@ -1,11 +1,21 @@
 <div class="container" fxLayout="row" fxLayoutAlign="center none">
   <div fxFlex="95%">
     <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon aria-hidden="false" aria-label="Home icon" fontIcon="home"></mat-icon>
+          {{ 'COMMON.HOME' | translate }}
+        </mat-card-title>
+      </mat-card-header>
       <mat-card-content>
-        <h1><mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon> {{ title }}</h1>
-        <p>This is the home page.</p>
+        <h2>{{ 'HOME.TITLE' | translate }}</h2>
+        <p>{{ 'HOME.DESCRIPTION' | translate }}</p>
+        <div class="language-info">
+          <p>{{ 'COMMON.LANGUAGE' | translate }}: {{ i18nService.getCurrentLanguage()?.flag }} {{ i18nService.getCurrentLanguage()?.name }}</p>
+        </div>
         <app-todo></app-todo>
       </mat-card-content>
+
     </mat-card>
   </div>
 </div>
